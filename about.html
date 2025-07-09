@@ -58,6 +58,12 @@
       color: var(--accent-color);
     }
 
+    nav a.active {
+      color: var(--accent-color);
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 2px;
+    }
+
     main {
       max-width: 800px;
       margin: 0 auto;
@@ -92,7 +98,7 @@
       </div>
       <div style="display: flex; gap: 2rem;">
         <a href="index.html">Home</a>
-        <a href="about.html">About</a>
+        <a href="about.html" class="active">About</a>
         <a href="projects.html">Projects</a>
         <a href="blog.html">Blog</a>
         <a href="apps.html">Applications</a>
@@ -110,6 +116,7 @@
 
   <footer>
     <p>&copy; 2025 Jack Smith. All rights reserved.</p>
+    <p>Connect with me via <a href="mailto:contact@vulnsmith.com" style="color: var(--accent-color); text-decoration: none;">email</a> or follow me on <a href="https://www.linkedin.com/in/vulnsmith/" style="color: var(--accent-color); text-decoration: none;">LinkedIn</a>.</p>
   </footer>
 </body>
 
