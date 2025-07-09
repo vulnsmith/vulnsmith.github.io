@@ -30,7 +30,7 @@
     }
 
     header {
-      padding: 2rem;
+      padding: 0;
       text-align: center;
     }
 
@@ -41,9 +41,10 @@
 
     nav {
       display: flex;
-      justify-content: center;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 2rem;
       gap: 2rem;
-      padding: 1rem;
     }
 
     nav a {
@@ -85,17 +86,20 @@
 
 <body>
   <header>
-    <h1>Jack Smith - Projects</h1>
+    <nav style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem;">
+      <div style="font-weight: bold; font-size: 1.15rem; letter-spacing: 0.02em;">
+        <span style="font-weight: bold; font-size: 1.15rem;">Jack Smith</span> <span style="font-weight: 400; color: #888;">| vulnsmith</span>
+      </div>
+      <div style="display: flex; gap: 2rem;">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog.html">Blog</a>
+        <a href="apps.html">Applications</a>
+        <a href="tools.html">Tools</a>
+      </div>
+    </nav>
   </header>
-
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="projects.html">Projects</a>
-    <a href="blog.html">Blog</a>
-    <a href="apps.html">Applications</a>
-    <a href="tools.html">Tools</a>
-  </nav>
 
   <main>
     <section id="projects">
