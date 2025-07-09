@@ -47,6 +47,13 @@
     nav a:hover {
       color: var(--accent-color);
     }
+
+    nav a.active {
+      color: var(--accent-color);
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 2px;
+    }
+
     main {
       max-width: 800px;
       margin: 0 auto;
@@ -82,7 +89,7 @@
         <a href="projects.html">Projects</a>
         <a href="blog.html">Blog</a>
         <a href="apps.html">Applications</a>
-        <a href="tools.html">Tools</a>
+        <a href="tools.html" class="active">Tools</a>
       </div>
     </nav>
   </header>
