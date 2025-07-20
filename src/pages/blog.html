@@ -9,7 +9,27 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap" rel="stylesheet">
-  <link href="../styles/pages.css" rel="stylesheet">
+  <link href="../css/pages.css" rel="stylesheet">
+  <style>
+    /* Make the whole page a flex container with column direction */
+    html, body {
+      height: 100%;      /* full height */
+      margin: 0;         /* remove default margin */
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;           /* take all remaining space */
+    }
+    footer {
+      background: #222;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
