@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Security Tools by Jack Smith" />
+  <title>Tools | Jack Smith</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="css/pages.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <nav style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem;">
+      <div style="font-weight: bold; font-size: 1.15rem; letter-spacing: 0.02em;">
+        <span style="font-weight: bold; font-size: 1.15rem;">Jack Smith</span> <span style="font-weight: 400; color: #888;">| vulnsmith</span>
+      </div>
+      <div style="display: flex; gap: 2rem;">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog.html">Blog</a>
+        <a href="apps.html">Applications</a>
+        <a href="tools.html" class="active">Tools</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="tools-container">
+    <h2>Security Tools</h2>
+    <p class="page-intro">A curated collection of command-line tools, scripts, and frameworks for security assessment, penetration testing, and defensive operations.</p>
+
+    <!-- Active Directory -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Active Directory</h3>
+          <span class="count">12 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/netwrix/pingcastle" target="_blank" rel="noopener">PingCastle</a></h4>
+              <span class="card-badge">Assessment</span>
+            </div>
+            <p class="card-description">Identify and remediate 80% of AD risk in 20% of the time. Comprehensive Active Directory security assessment tool that generates detailed reports on vulnerabilities and misconfigurations.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://www.semperis.com/purple-knight/" target="_blank" rel="noopener">Purple Knight</a></h4>
+              <span class="card-badge">Assessment</span>
+            </div>
+            <p class="card-description">Discover Indicators of Exposure (IoEs) and Indicators of Compromise (IoCs) in hybrid AD environments. Free community tool for AD security posture assessment.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://www.semperis.com/forest-druid/" target="_blank" rel="noopener">Forest Druid</a></h4>
+              <span class="card-badge">Tiering</span>
+            </div>
+            <p class="card-description">Find attack paths leading into Tier 0 perimeter in hybrid identity environments. Visualize privilege escalation paths and identify misconfigurations in AD tiering models.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/jakehildreth/Locksmith" target="_blank" rel="noopener">Locksmith</a></h4>
+              <span class="card-badge">ADCS</span>
+            </div>
+            <p class="card-description">Find and fix common misconfigurations in Active Directory Certificate Services. PowerShell tool that identifies vulnerable certificate templates and ESC attack vectors.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/MichaelGrafnetter/DSInternals" target="_blank" rel="noopener">DSInternals</a></h4>
+              <span class="card-badge">Forensics</span>
+            </div>
+            <p class="card-description">Active Directory database forensics and password auditing. PowerShell module for offline ntds.dit analysis, password hash extraction, and credential auditing.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/techspence/ADeleginator" target="_blank" rel="noopener">ADeleginator</a></h4>
+              <span class="card-badge">Delegation</span>
+            </div>
+            <p class="card-description">Uses ADeleg to find insecure trustee and resource delegations. Identifies dangerous Kerberos delegation settings that could enable lateral movement attacks.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/NetSPI/PowerHuntShares" target="_blank" rel="noopener">PowerHuntShares</a></h4>
+              <span class="card-badge">Shares</span>
+            </div>
+            <p class="card-description">Audit script to inventory, analyze, and report excessive share privileges. Discovers overly permissive network shares that could expose sensitive data.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/jakehildreth/BlueTuxedo" target="_blank" rel="noopener">Blue Tuxedo</a></h4>
+              <span class="card-badge">DNS</span>
+            </div>
+            <p class="card-description">Find and fix common misconfigurations in AD-Integrated DNS. Identifies DNS zones with insecure dynamic updates and other DNS security issues.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/EvotecIT/GPOZaurr" target="_blank" rel="noopener">GPOZaurr</a></h4>
+              <span class="card-badge">GPO</span>
+            </div>
+            <p class="card-description">Gather information about Group Policies and fix issues. PowerShell module for comprehensive GPO analysis, cleanup, and security assessment.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/sense-of-security/ADRecon" target="_blank" rel="noopener">ADRecon</a></h4>
+              <span class="card-badge">Enumeration</span>
+            </div>
+            <p class="card-description">Extract and combine various artifacts from AD environment. Generates comprehensive Excel reports covering users, groups, GPOs, and security configurations.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/PlumHound/PlumHound" target="_blank" rel="noopener">PlumHound</a></h4>
+              <span class="card-badge">Reporting</span>
+            </div>
+            <p class="card-description">BloodHound report generator for AD security analysis. Creates actionable reports from BloodHound data to prioritize remediation efforts.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/canix1/ADACLScanner" target="_blank" rel="noopener">ADACLScanner</a></h4>
+              <span class="card-badge">ACL Analysis</span>
+            </div>
+            <p class="card-description">AD ACL permission scanner and reporter. Identifies excessive permissions on AD objects that could be exploited for privilege escalation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Security -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>AI Security</h3>
+          <span class="count">3 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/leondz/garak" target="_blank" rel="noopener">Garak</a></h4>
+              <span class="card-badge">LLM Testing</span>
+            </div>
+            <p class="card-description">LLM vulnerability scanner that probes large language models for various weaknesses including prompt injection, jailbreaks, and data leakage vulnerabilities.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/ZeroLeaks/zeroleaks" target="_blank" rel="noopener">ZeroLeaks Scanner</a></h4>
+              <span class="card-badge">Prompt Injection</span>
+            </div>
+            <p class="card-description">Test AI systems for prompt injection and extraction vulnerabilities. Automated testing framework for identifying weaknesses in AI-powered applications.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/agencyenterprise/PromptInject" target="_blank" rel="noopener">PromptInject</a></h4>
+              <span class="card-badge">Testing</span>
+            </div>
+            <p class="card-description">Framework for testing prompt injection attacks against LLM applications. Includes various attack payloads and testing methodologies.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cloud Security -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Cloud Security</h3>
+          <span class="count">7 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/prowler-cloud/prowler" target="_blank" rel="noopener">Prowler</a></h4>
+              <span class="card-badge">Multi-Cloud</span>
+            </div>
+            <p class="card-description">Security assessment tool for AWS, Azure, GCP, and Kubernetes. Performs hundreds of security checks against cloud best practices and compliance frameworks like CIS, NIST, and PCI-DSS.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/cisagov/ScubaGear" target="_blank" rel="noopener">ScubaGear</a></h4>
+              <span class="card-badge">M365</span>
+            </div>
+            <p class="card-description">Automation to assess M365 tenant against CISA baselines. CISA's official tool for evaluating Microsoft 365 security configurations against SCuBA guidance.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/maester365/maester" target="_blank" rel="noopener">Maester</a></h4>
+              <span class="card-badge">M365</span>
+            </div>
+            <p class="card-description">PowerShell-based test automation framework for Microsoft 365 security configuration monitoring. Continuous compliance monitoring with customizable test cases.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/nccgroup/ScoutSuite" target="_blank" rel="noopener">ScoutSuite</a></h4>
+              <span class="card-badge">Multi-Cloud</span>
+            </div>
+            <p class="card-description">Multi-cloud security auditing tool for AWS, Azure, GCP, and more. Generates comprehensive HTML reports with findings organized by service and severity.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/turbot/steampipe" target="_blank" rel="noopener">Steampipe</a></h4>
+              <span class="card-badge">Query Engine</span>
+            </div>
+            <p class="card-description">Universal SQL interface for cloud APIs - query cloud resources with SQL. Supports hundreds of plugins for AWS, Azure, GCP, and SaaS applications.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/duo-labs/cloudmapper" target="_blank" rel="noopener">CloudMapper</a></h4>
+              <span class="card-badge">AWS</span>
+            </div>
+            <p class="card-description">Analyze AWS environments for security and compliance. Creates network diagrams and identifies public exposure, unused resources, and misconfigurations.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/aquasecurity/cloudsploit" target="_blank" rel="noopener">CloudSploit</a></h4>
+              <span class="card-badge">AWS</span>
+            </div>
+            <p class="card-description">AWS security scanning and monitoring. Cloud security posture management with support for multiple cloud providers and compliance frameworks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container Security -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Container Security</h3>
+          <span class="count">6 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/falcosecurity/falco" target="_blank" rel="noopener">Falco</a></h4>
+              <span class="card-badge">Runtime Security</span>
+            </div>
+            <p class="card-description">Cloud-native runtime security for containers and Kubernetes (CNCF). Detects anomalous activity in containers using system call monitoring and customizable rules.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/kyverno/kyverno" target="_blank" rel="noopener">Kyverno</a></h4>
+              <span class="card-badge">Policy Engine</span>
+            </div>
+            <p class="card-description">Kubernetes policy engine for security and automation. Define policies as Kubernetes resources to validate, mutate, and generate configurations.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/kubescape/kubescape" target="_blank" rel="noopener">Kubescape</a></h4>
+              <span class="card-badge">Posture Management</span>
+            </div>
+            <p class="card-description">Kubernetes security posture management and compliance. Scans clusters against NSA/CISA hardening guidelines and generates remediation recommendations.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/aquasecurity/kube-bench" target="_blank" rel="noopener">Kube-bench</a></h4>
+              <span class="card-badge">CIS Benchmark</span>
+            </div>
+            <p class="card-description">Checks Kubernetes deployment against CIS Kubernetes Benchmark. Automated compliance checking for master and worker node configurations.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/open-policy-agent/gatekeeper" target="_blank" rel="noopener">OPA Gatekeeper</a></h4>
+              <span class="card-badge">Policy Enforcement</span>
+            </div>
+            <p class="card-description">Policy controller for Kubernetes using Open Policy Agent. Enforce organizational policies as admission controller webhooks.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/FairwindsOps/polaris" target="_blank" rel="noopener">Polaris</a></h4>
+              <span class="card-badge">Configuration Validation</span>
+            </div>
+            <p class="card-description">Kubernetes configuration validation and best practices. Identifies deployment configurations that deviate from security best practices.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detection Engineering -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Detection Engineering</h3>
+          <span class="count">3 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/SigmaHQ/sigma" target="_blank" rel="noopener">Sigma Rules</a></h4>
+              <span class="card-badge">SIEM Rules</span>
+            </div>
+            <p class="card-description">Main Sigma rule repository for SIEM detection. Generic signature format for log events that can be converted to various SIEM query languages.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/YARAHQ/yara-forge" target="_blank" rel="noopener">YARA Forge</a></h4>
+              <span class="card-badge">YARA Rules</span>
+            </div>
+            <p class="card-description">Automated YARA rule standardization and quality assurance. Validates and normalizes YARA rules for consistent detection capabilities.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/SwiftOnSecurity/sysmon-config" target="_blank" rel="noopener">Sysmon Config</a></h4>
+              <span class="card-badge">Event Logging</span>
+            </div>
+            <p class="card-description">Sysmon configuration file template with high-quality event tracing. Widely-used baseline configuration for Windows endpoint monitoring.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Endpoint Security -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Endpoint Security</h3>
+          <span class="count">8 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/scipag/HardeningKitty" target="_blank" rel="noopener">HardeningKitty</a></h4>
+              <span class="card-badge">Hardening</span>
+            </div>
+            <p class="card-description">Check and harden Windows configuration. PowerShell script that audits Windows against CIS benchmarks and applies hardening settings.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/Velocidex/velociraptor" target="_blank" rel="noopener">Velociraptor</a></h4>
+              <span class="card-badge">DFIR</span>
+            </div>
+            <p class="card-description">Endpoint visibility and collection tool for digital forensics. Advanced artifact collection and hunting across thousands of endpoints using VQL queries.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/CISOfy/lynis" target="_blank" rel="noopener">Lynis</a></h4>
+              <span class="card-badge">Security Auditing</span>
+            </div>
+            <p class="card-description">Security auditing tool for Unix/Linux systems. Performs in-depth security scans covering system hardening, compliance, and vulnerability detection.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/ossec/ossec-hids" target="_blank" rel="noopener">OSSEC</a></h4>
+              <span class="card-badge">HIDS</span>
+            </div>
+            <p class="card-description">Open source host-based intrusion detection system. Monitors file integrity, log analysis, rootkit detection, and real-time alerting.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/techspence/AppLockerInspector" target="_blank" rel="noopener">AppLocker Inspector</a></h4>
+              <span class="card-badge">AppLocker</span>
+            </div>
+            <p class="card-description">Audit AppLocker policy XML for weak/misconfigured settings. Identifies bypass opportunities and overly permissive application whitelisting rules.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/techspence/ScriptSentry" target="_blank" rel="noopener">ScriptSentry</a></h4>
+              <span class="card-badge">Logon Scripts</span>
+            </div>
+            <p class="card-description">Find misconfigured and dangerous logon scripts. Identifies scripts with weak permissions or containing sensitive information.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/aide/aide" target="_blank" rel="noopener">Aide</a></h4>
+              <span class="card-badge">File Integrity</span>
+            </div>
+            <p class="card-description">Advanced Intrusion Detection Environment - file integrity checker. Creates database of file attributes for detecting unauthorized changes.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/last-byte/PersistenceSniper" target="_blank" rel="noopener">PersistenceSniper</a></h4>
+              <span class="card-badge">Persistence Hunting</span>
+            </div>
+            <p class="card-description">PowerShell module to hunt persistence mechanisms in Windows. Detects common and obscure persistence techniques used by attackers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Forensics -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Forensics</h3>
+          <span class="count">3 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/google/timesketch" target="_blank" rel="noopener">Timesketch</a></h4>
+              <span class="card-badge">Timeline Analysis</span>
+            </div>
+            <p class="card-description">Collaborative forensic timeline analysis. Open-source tool for creating and analyzing timelines from various forensic artifacts and log sources.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/cisagov/LME" target="_blank" rel="noopener">LME</a></h4>
+              <span class="card-badge">Log Management</span>
+            </div>
+            <p class="card-description">Logging Made Easy - centralized log collection and threat detection. CISA's free solution for Windows event log collection and basic threat hunting.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/VirusTotal/yara" target="_blank" rel="noopener">YARA</a></h4>
+              <span class="card-badge">Pattern Matching</span>
+            </div>
+            <p class="card-description">Pattern matching tool for malware research. Create rules to identify and classify malware samples based on textual and binary patterns.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fuzzing -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Fuzzing</h3>
+          <span class="count">5 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/AFLplusplus/AFLplusplus" target="_blank" rel="noopener">AFL++</a></h4>
+              <span class="card-badge">General</span>
+            </div>
+            <p class="card-description">American Fuzzy Lop plus plus - improved fuzzing tool. Fork of AFL with many improvements including custom mutators, persistent mode, and QEMU support.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/google/oss-fuzz" target="_blank" rel="noopener">OSS-Fuzz</a></h4>
+              <span class="card-badge">Continuous Fuzzing</span>
+            </div>
+            <p class="card-description">Continuous fuzzing for open source software. Google's infrastructure for running fuzzers 24/7 against critical open source projects.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/google/honggfuzz" target="_blank" rel="noopener">Honggfuzz</a></h4>
+              <span class="card-badge">General</span>
+            </div>
+            <p class="card-description">Security oriented software fuzzer with evolutionary feedback. Supports hardware-based instrumentation and software-based coverage feedback.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/google/syzkaller" target="_blank" rel="noopener">Syzkaller</a></h4>
+              <span class="card-badge">Kernel</span>
+            </div>
+            <p class="card-description">Unsupervised coverage-guided kernel fuzzer. Automatically generates programs to test kernel syscall interfaces for bugs and vulnerabilities.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://llvm.org/docs/LibFuzzer.html" target="_blank" rel="noopener">LibFuzzer</a></h4>
+              <span class="card-badge">Library</span>
+            </div>
+            <p class="card-description">In-process, coverage-guided, evolutionary fuzzing engine. LLVM-based fuzzer ideal for testing libraries and code units with minimal setup.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IAM -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>IAM</h3>
+          <span class="count">3 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/SpecterOps/BloodHound" target="_blank" rel="noopener">BloodHound</a></h4>
+              <span class="card-badge">Attack Paths</span>
+            </div>
+            <p class="card-description">Reveal hidden relationships across identity and access management systems. Graph-based tool for mapping AD attack paths and identifying privilege escalation routes.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/SpecterOps/BloodHound" target="_blank" rel="noopener">BloodHound CE</a></h4>
+              <span class="card-badge">Attack Paths</span>
+            </div>
+            <p class="card-description">Community Edition of BloodHound with enhanced features. Includes improved UI, API access, and extended query capabilities for enterprise environments.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/dirkjanm/ROADtools" target="_blank" rel="noopener">ROADtools</a></h4>
+              <span class="card-badge">Azure AD</span>
+            </div>
+            <p class="card-description">Framework to interact with Azure AD for offensive and defensive security. Enumerate and analyze Azure AD configurations, permissions, and attack paths.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IaC Security -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>IaC Security</h3>
+          <span class="count">5 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/bridgecrewio/checkov" target="_blank" rel="noopener">Checkov</a></h4>
+              <span class="card-badge">Static Analysis</span>
+            </div>
+            <p class="card-description">Static analysis for Terraform, CloudFormation, Kubernetes, and more. Scans infrastructure as code for misconfigurations, secrets, and compliance violations.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/aquasecurity/tfsec" target="_blank" rel="noopener">tfsec</a></h4>
+              <span class="card-badge">Terraform</span>
+            </div>
+            <p class="card-description">Security scanner for Terraform code. Fast static analysis specifically designed for finding security issues in Terraform configurations.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/tenable/terrascan" target="_blank" rel="noopener">Terrascan</a></h4>
+              <span class="card-badge">Multi-IaC</span>
+            </div>
+            <p class="card-description">Static code analyzer for infrastructure as code. Detects compliance and security violations across Terraform, Kubernetes, and cloud configs.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/Checkmarx/kics" target="_blank" rel="noopener">KICS</a></h4>
+              <span class="card-badge">Multi-IaC</span>
+            </div>
+            <p class="card-description">Keeping Infrastructure as Code Secure - find security vulnerabilities. Supports Terraform, Kubernetes, Docker, CloudFormation, and more.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/infracost/infracost" target="_blank" rel="noopener">Infracost</a></h4>
+              <span class="card-badge">Cost Analysis</span>
+            </div>
+            <p class="card-description">Cloud cost estimates for Terraform in pull requests. Shows cost impact of infrastructure changes before deployment to prevent budget surprises.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Infrastructure -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Infrastructure</h3>
+          <span class="count">2 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/hashicorp/terraform" target="_blank" rel="noopener">Terraform</a></h4>
+              <span class="card-badge">IaC</span>
+            </div>
+            <p class="card-description">Infrastructure as Code tool. Define and provision cloud infrastructure using declarative configuration files with state management and drift detection.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/ansible/ansible" target="_blank" rel="noopener">Ansible</a></h4>
+              <span class="card-badge">Automation</span>
+            </div>
+            <p class="card-description">Agentless automation tool for configuration management. Define infrastructure state using YAML playbooks and execute over SSH without agents.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Network Security -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Network Security</h3>
+          <span class="count">7 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/lgandx/Responder" target="_blank" rel="noopener">Responder</a></h4>
+              <span class="card-badge">Pentesting</span>
+            </div>
+            <p class="card-description">LLMNR, NBT-NS and MDNS poisoner with rogue authentication servers. Essential tool for capturing NTLMv2 hashes during internal penetration tests.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/zeek/zeek" target="_blank" rel="noopener">Zeek</a></h4>
+              <span class="card-badge">Monitoring</span>
+            </div>
+            <p class="card-description">Powerful network analysis framework for security monitoring. Generates detailed logs of network activity for threat hunting and incident response.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/OISF/suricata" target="_blank" rel="noopener">Suricata</a></h4>
+              <span class="card-badge">IDS/IPS</span>
+            </div>
+            <p class="card-description">High performance Network IDS, IPS and security monitoring. Multi-threaded engine with support for protocol detection and file extraction.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/Pennyw0rth/NetExec" target="_blank" rel="noopener">NetExec</a></h4>
+              <span class="card-badge">Execution</span>
+            </div>
+            <p class="card-description">Swiss army knife for pentesting networks (formerly CrackMapExec). Automates credential testing, command execution, and lateral movement across networks.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/crowdsecurity/crowdsec" target="_blank" rel="noopener">CrowdSec</a></h4>
+              <span class="card-badge">OSINT</span>
+            </div>
+            <p class="card-description">Crowdsourced protection against malicious IPs. Analyzes logs to detect attacks and shares threat intelligence with the community for collective defense.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/ntop/ntopng" target="_blank" rel="noopener">ntopng</a></h4>
+              <span class="card-badge">Traffic Analysis</span>
+            </div>
+            <p class="card-description">High-speed web-based traffic analysis and flow collection. Real-time network monitoring with deep packet inspection and flow analysis.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/arkime/arkime" target="_blank" rel="noopener">Arkime</a></h4>
+              <span class="card-badge">Packet Capture</span>
+            </div>
+            <p class="card-description">Large scale packet capture, indexing, and database system (formerly Moloch). Full packet capture with powerful search and session reconstruction.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Offensive Security -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Offensive Security</h3>
+          <span class="count">12 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/rapid7/metasploit-framework" target="_blank" rel="noopener">Metasploit</a></h4>
+              <span class="card-badge">Exploitation</span>
+            </div>
+            <p class="card-description">Penetration testing framework. World's most used penetration testing software with extensive exploit database, payloads, and auxiliary modules.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/peass-ng/PEASS-ng" target="_blank" rel="noopener">PEASS-ng</a></h4>
+              <span class="card-badge">Privilege Escalation</span>
+            </div>
+            <p class="card-description">Privilege Escalation Awesome Scripts Suite with colors. Comprehensive enumeration scripts for Windows and Linux privilege escalation vectors.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/BishopFox/sliver" target="_blank" rel="noopener">Sliver</a></h4>
+              <span class="card-badge">C2 Framework</span>
+            </div>
+            <p class="card-description">Modern adversary emulation and red team framework. Cross-platform implant framework with encrypted C2, staging, and evasion capabilities.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/xmendez/wfuzz" target="_blank" rel="noopener">Wfuzz</a></h4>
+              <span class="card-badge">Web Fuzzing</span>
+            </div>
+            <p class="card-description">Web application fuzzer. Brute force web application parameters, directories, and form fields with customizable payloads and filters.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/trustedsec/social-engineer-toolkit" target="_blank" rel="noopener">Social Engineer Toolkit</a></h4>
+              <span class="card-badge">Social Engineering</span>
+            </div>
+            <p class="card-description">Framework for social engineering attacks. Includes phishing, credential harvesting, and payload delivery for security awareness testing.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/drk1wi/Modlishka" target="_blank" rel="noopener">Modlishka</a></h4>
+              <span class="card-badge">Reverse Proxy</span>
+            </div>
+            <p class="card-description">Reverse proxy for phishing campaigns. Automated MFA bypass through real-time session hijacking and credential interception.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/SafeBreach-Labs/PoolParty" target="_blank" rel="noopener">PoolParty</a></h4>
+              <span class="card-badge">Process Injection</span>
+            </div>
+            <p class="card-description">Undetectable process injection techniques using Windows Thread Pools. Novel injection methods that bypass common detection mechanisms.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/Sh3lldon/FullBypass" target="_blank" rel="noopener">FullBypass</a></h4>
+              <span class="card-badge">AMSI Bypass</span>
+            </div>
+            <p class="card-description">Bypasses AMSI and PowerShell CLM for reverse shells. Evades Windows security controls to execute malicious PowerShell during assessments.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/trustedsec/tap" target="_blank" rel="noopener">TrustedSec TAP</a></h4>
+              <span class="card-badge">Infrastructure</span>
+            </div>
+            <p class="card-description">TrustedSec Attack Platform for reliable droppers. Red team infrastructure for payload delivery and persistent access establishment.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/ambionics/phpggc" target="_blank" rel="noopener">PHPGGC</a></h4>
+              <span class="card-badge">Exploitation</span>
+            </div>
+            <p class="card-description">PHP unserialize() payload generator. Library of gadget chains for exploiting PHP deserialization vulnerabilities.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/pentestmonkey/php-reverse-shell" target="_blank" rel="noopener">PHP Reverse Shell</a></h4>
+              <span class="card-badge">Web Shells</span>
+            </div>
+            <p class="card-description">Classic PHP reverse shell. Reliable reverse shell script for gaining command execution through web vulnerabilities.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/sqlmapproject/sqlmap" target="_blank" rel="noopener">SQLMap</a></h4>
+              <span class="card-badge">SQL Injection</span>
+            </div>
+            <p class="card-description">Automatic SQL injection and database takeover tool. Detects and exploits SQL injection flaws with support for multiple database backends.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OSINT -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>OSINT</h3>
+          <span class="count">9 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/danielmiessler/SecLists" target="_blank" rel="noopener">SecLists</a></h4>
+              <span class="card-badge">Wordlists</span>
+            </div>
+            <p class="card-description">Collection of multiple types of lists used during security assessments. Usernames, passwords, URLs, sensitive data patterns, and fuzzing payloads.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/sherlock-project/sherlock" target="_blank" rel="noopener">Sherlock</a></h4>
+              <span class="card-badge">Username Search</span>
+            </div>
+            <p class="card-description">Hunt down social media accounts by username across social networks. Checks hundreds of sites for matching usernames during investigations.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/mxrch/GHunt" target="_blank" rel="noopener">GHunt</a></h4>
+              <span class="card-badge">Google OSINT</span>
+            </div>
+            <p class="card-description">Offensive Google framework for OSINT. Extract information from Google accounts including photos, maps reviews, and YouTube activity.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/qeeqbox/social-analyzer" target="_blank" rel="noopener">Social Analyzer</a></h4>
+              <span class="card-badge">Profile Analysis</span>
+            </div>
+            <p class="card-description">API, CLI, and Web App for analyzing person's profile in 1000+ social media sites. Comprehensive social media reconnaissance tool.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/twintproject/twint" target="_blank" rel="noopener">Twint</a></h4>
+              <span class="card-badge">Twitter Scraping</span>
+            </div>
+            <p class="card-description">Advanced Twitter scraping & OSINT tool (no API required). Scrape tweets, followers, and user data without authentication limits.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/jofpin/trape" target="_blank" rel="noopener">Trape</a></h4>
+              <span class="card-badge">People Tracking</span>
+            </div>
+            <p class="card-description">People tracker on the Internet - OSINT analysis tool. Track and gather information about targets through phishing pages.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/MISP/MISP" target="_blank" rel="noopener">MISP</a></h4>
+              <span class="card-badge">Threat Intelligence</span>
+            </div>
+            <p class="card-description">Open source threat intelligence and sharing platform. Share, store, and correlate Indicators of Compromise across organizations.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/TheHive-Project/TheHive" target="_blank" rel="noopener">TheHive</a></h4>
+              <span class="card-badge">Incident Response</span>
+            </div>
+            <p class="card-description">Scalable security incident response platform. Case management for SOC teams with Cortex integration for automated analysis.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/OpenCTI-Platform/opencti" target="_blank" rel="noopener">OpenCTI</a></h4>
+              <span class="card-badge">Threat Intelligence</span>
+            </div>
+            <p class="card-description">Open cyber threat intelligence platform. Structured threat intelligence management with STIX2 support and relationship mapping.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reconnaissance -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Reconnaissance</h3>
+          <span class="count">4 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/projectdiscovery/nuclei" target="_blank" rel="noopener">Nuclei</a></h4>
+              <span class="card-badge">Vulnerability Scanning</span>
+            </div>
+            <p class="card-description">Fast and customizable vulnerability scanner. Template-based scanning engine with thousands of community-contributed detection templates.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/owasp-amass/amass" target="_blank" rel="noopener">Amass</a></h4>
+              <span class="card-badge">Discovery</span>
+            </div>
+            <p class="card-description">In-depth attack surface mapping and asset discovery. Comprehensive subdomain enumeration using multiple data sources and techniques.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/projectdiscovery/subfinder" target="_blank" rel="noopener">Subfinder</a></h4>
+              <span class="card-badge">Subdomain</span>
+            </div>
+            <p class="card-description">Fast passive subdomain enumeration tool. Discovers subdomains using passive sources without touching target infrastructure.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/projectdiscovery/katana" target="_blank" rel="noopener">Katana</a></h4>
+              <span class="card-badge">Web Crawling</span>
+            </div>
+            <p class="card-description">Next-generation crawling and spidering framework. Fast web crawler with JavaScript rendering and automatic form filling.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secret Detection -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Secret Detection</h3>
+          <span class="count">3 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/trufflesecurity/trufflehog" target="_blank" rel="noopener">TruffleHog</a></h4>
+              <span class="card-badge">Git Scanning</span>
+            </div>
+            <p class="card-description">Find secrets in git repos with high entropy detection. Scans commit history for API keys, passwords, and other sensitive data leaks.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/gitleaks/gitleaks" target="_blank" rel="noopener">Gitleaks</a></h4>
+              <span class="card-badge">Git Scanning</span>
+            </div>
+            <p class="card-description">Fast secret scanner for git repos, files, and directories. Supports custom rules and integrates with CI/CD pipelines for pre-commit scanning.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/awslabs/git-secrets" target="_blank" rel="noopener">git-secrets</a></h4>
+              <span class="card-badge">Prevention</span>
+            </div>
+            <p class="card-description">AWS secret prevention tool for git. Pre-commit hooks that prevent committing AWS credentials and other secrets to repositories.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vulnerability Assessment -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Vulnerability Assessment</h3>
+          <span class="count">8 tools</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/aquasecurity/trivy" target="_blank" rel="noopener">Trivy</a></h4>
+              <span class="card-badge">Container</span>
+            </div>
+            <p class="card-description">Comprehensive security scanner for containers and IaC. Scans container images, filesystems, git repos, and Kubernetes manifests for vulnerabilities.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/DependencyTrack/dependency-track" target="_blank" rel="noopener">Dependency-Track</a></h4>
+              <span class="card-badge">SBOM Management</span>
+            </div>
+            <p class="card-description">Intelligent component analysis platform for supply chain security. Continuous SBOM analysis with vulnerability tracking across projects.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/anchore/grype" target="_blank" rel="noopener">Grype</a></h4>
+              <span class="card-badge">Container</span>
+            </div>
+            <p class="card-description">Vulnerability scanner for container images and filesystems. Fast scanning with support for multiple vulnerability databases and SBOM input.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/semgrep/semgrep" target="_blank" rel="noopener">Semgrep</a></h4>
+              <span class="card-badge">SAST</span>
+            </div>
+            <p class="card-description">Lightweight static analysis for finding bugs and enforcing code standards. Pattern-based code scanning with extensive rule library.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/google/osv-scanner" target="_blank" rel="noopener">OSV-Scanner</a></h4>
+              <span class="card-badge">Dependency Scanning</span>
+            </div>
+            <p class="card-description">Vulnerability scanner for dependencies using OSV database. Google's open-source vulnerability database scanner for package ecosystems.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/RetireJS/retire.js" target="_blank" rel="noopener">Retire.js</a></h4>
+              <span class="card-badge">JavaScript</span>
+            </div>
+            <p class="card-description">Scanner detecting JavaScript libraries with known vulnerabilities, generates SBOM. CLI and browser extension for identifying outdated JS dependencies.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/PyCQA/bandit" target="_blank" rel="noopener">Bandit</a></h4>
+              <span class="card-badge">Python</span>
+            </div>
+            <p class="card-description">Security linter for Python code. Static analysis tool that finds common security issues in Python applications.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/greenbone/openvas-scanner" target="_blank" rel="noopener">OpenVAS</a></h4>
+              <span class="card-badge">Scanner</span>
+            </div>
+            <p class="card-description">Full-featured vulnerability scanner and manager. Network vulnerability scanning with extensive plugin library and reporting.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Jack Smith. All rights reserved.</p>
+    <p>Connect with me via <a href="mailto:contact@vulnsmith.com" style="color: var(--accent-color); text-decoration: none;">email</a> or follow me on <a href="https://www.linkedin.com/in/vulnsmith/" style="color: var(--accent-color); text-decoration: none;">LinkedIn</a>.</p>
+  </footer>
+
+  <script>
+    function toggleAccordion(header) {
+      const accordion = header.parentElement;
+      accordion.classList.toggle('open');
+    }
+  </script>
+</body>
+
+</html>

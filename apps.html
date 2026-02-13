@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Applications by Jack Smith" />
+  <title>Applications | Jack Smith</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="css/pages.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <nav style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem;">
+      <div style="font-weight: bold; font-size: 1.15rem; letter-spacing: 0.02em;">
+        <span style="font-weight: bold; font-size: 1.15rem;">Jack Smith</span> <span style="font-weight: 400; color: #888;">| vulnsmith</span>
+      </div>
+      <div style="display: flex; gap: 2rem;">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="blog.html">Blog</a>
+        <a href="apps.html" class="active">Applications</a>
+        <a href="tools.html">Tools</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="apps-container">
+    <h2>Applications</h2>
+    <p class="page-intro">A collection of self-hosted applications, web-based tools, and GUI software for infrastructure management, monitoring, and productivity.</p>
+
+    <!-- Authentication -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Authentication</h3>
+          <span class="count">5 apps</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/dani-garcia/vaultwarden" target="_blank" rel="noopener">Vaultwarden</a></h4>
+              <span class="card-badge">Password Manager</span>
+            </div>
+            <p class="card-description">Unofficial Bitwarden server written in Rust (lightweight). Self-hosted password management with full Bitwarden client compatibility and minimal resource requirements.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/hashicorp/vault" target="_blank" rel="noopener">HashiCorp Vault</a></h4>
+              <span class="card-badge">Vault</span>
+            </div>
+            <p class="card-description">Secure, store and tightly control access to secrets. Enterprise-grade secrets management with dynamic credentials, encryption as a service, and audit logging.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/authelia/authelia" target="_blank" rel="noopener">Authelia</a></h4>
+              <span class="card-badge">SSO/2FA</span>
+            </div>
+            <p class="card-description">Single sign-on and 2FA portal for web applications. Add authentication layer to reverse proxies with support for TOTP, WebAuthn, and push notifications.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/keycloak/keycloak" target="_blank" rel="noopener">Keycloak</a></h4>
+              <span class="card-badge">IAM</span>
+            </div>
+            <p class="card-description">Open source identity and access management. Full-featured IAM solution with SSO, social login, user federation, and fine-grained authorization.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/goauthentik/authentik" target="_blank" rel="noopener">Authentik</a></h4>
+              <span class="card-badge">SSO/2FA</span>
+            </div>
+            <p class="card-description">Authentication and authorization server with web UI. Modern identity provider supporting SAML, OAuth2, LDAP with intuitive admin interface.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Backup -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Backup</h3>
+          <span class="count">4 apps</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/restic/restic" target="_blank" rel="noopener">Restic</a></h4>
+              <span class="card-badge">Deduplication</span>
+            </div>
+            <p class="card-description">Fast, secure, efficient backup program with encryption. Deduplicating backups to local or cloud storage with client-side encryption and cross-platform support.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/borgbackup/borg" target="_blank" rel="noopener">Borg Backup</a></h4>
+              <span class="card-badge">Deduplication</span>
+            </div>
+            <p class="card-description">Deduplicating archiver with compression and encryption. Space-efficient backups with authenticated encryption and optional remote repository support.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/kopia/kopia" target="_blank" rel="noopener">Kopia</a></h4>
+              <span class="card-badge">Encryption</span>
+            </div>
+            <p class="card-description">Fast and secure open-source backup/restore tool. Modern backup solution with web UI, snapshot policies, and support for many storage backends.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/duplicati/duplicati" target="_blank" rel="noopener">Duplicati</a></h4>
+              <span class="card-badge">Cloud Backup</span>
+            </div>
+            <p class="card-description">Store encrypted backups in the cloud. Web-based backup solution with scheduling, incremental backups, and support for 20+ cloud providers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container Management -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Container Management</h3>
+          <span class="count">3 apps</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/portainer/portainer" target="_blank" rel="noopener">Portainer</a></h4>
+              <span class="card-badge">Docker UI</span>
+            </div>
+            <p class="card-description">Lightweight management UI for Docker/Kubernetes. Intuitive web interface for managing containers, images, networks, and volumes across multiple environments.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/louislam/dockge" target="_blank" rel="noopener">Dockge</a></h4>
+              <span class="card-badge">Docker Compose</span>
+            </div>
+            <p class="card-description">Self-hosted Docker Compose stack manager. Clean web UI for managing docker-compose.yaml files with real-time container logs and status.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/SelfhostedPro/Yacht" target="_blank" rel="noopener">Yacht</a></h4>
+              <span class="card-badge">Docker UI</span>
+            </div>
+            <p class="card-description">Web interface for managing Docker containers. Template-based container deployment with app store functionality for easy self-hosting.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DNS Security -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>DNS Security</h3>
+          <span class="count">3 apps</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/pi-hole/pi-hole" target="_blank" rel="noopener">Pi-hole</a></h4>
+              <span class="card-badge">DNS Filtering</span>
+            </div>
+            <p class="card-description">Network-wide ad blocking via DNS. Self-hosted DNS sinkhole that blocks ads, trackers, and malware domains for all devices on your network.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/AdguardTeam/AdGuardHome" target="_blank" rel="noopener">AdGuard Home</a></h4>
+              <span class="card-badge">DNS Filtering</span>
+            </div>
+            <p class="card-description">Network-wide ads and trackers blocking DNS server. Modern alternative to Pi-hole with DNS-over-HTTPS, DNS-over-TLS, and parental controls.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/0xERR0R/blocky" target="_blank" rel="noopener">Blocky</a></h4>
+              <span class="card-badge">DNS Proxy</span>
+            </div>
+            <p class="card-description">Fast and lightweight DNS proxy with ad-blocking. Container-friendly DNS server with group-based filtering and Prometheus metrics.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Documentation -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Documentation</h3>
+          <span class="count">4 apps</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/outline/outline" target="_blank" rel="noopener">Outline</a></h4>
+              <span class="card-badge">Knowledge Base</span>
+            </div>
+            <p class="card-description">Fastest wiki and knowledge base for teams. Beautiful, real-time collaborative wiki with Slack integration and markdown support.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/TriliumNext/Trilium" target="_blank" rel="noopener">Trilium Notes</a></h4>
+              <span class="card-badge">Note Taking</span>
+            </div>
+            <p class="card-description">Build your personal knowledge base with hierarchical notes. Powerful note-taking app with scripting, cloning, and end-to-end encryption.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/requarks/wiki" target="_blank" rel="noopener">WikiJS</a></h4>
+              <span class="card-badge">Wiki</span>
+            </div>
+            <p class="card-description">Modern and powerful wiki application. Feature-rich wiki with multiple editors, authentication providers, and search engines.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/BookStackApp/BookStack" target="_blank" rel="noopener">BookStack</a></h4>
+              <span class="card-badge">Wiki</span>
+            </div>
+            <p class="card-description">Simple, self-hosted platform for organising documentation. Intuitive book/chapter/page hierarchy with WYSIWYG and markdown editing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Home Automation -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Home Automation</h3>
+          <span class="count">4 apps</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/esphome/esphome" target="_blank" rel="noopener">ESPHome</a></h4>
+              <span class="card-badge">IoT Firmware</span>
+            </div>
+            <p class="card-description">ESP8266/ESP32 configuration and firmware platform. Create custom IoT devices using simple YAML configuration with Home Assistant integration.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/node-red/node-red" target="_blank" rel="noopener">Node-RED</a></h4>
+              <span class="card-badge">Flow Automation</span>
+            </div>
+            <p class="card-description">Flow-based programming for event-driven applications. Visual automation tool connecting APIs, hardware, and services with drag-and-drop nodes.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/Koenkk/zigbee2mqtt" target="_blank" rel="noopener">Zigbee2MQTT</a></h4>
+              <span class="card-badge">Zigbee Bridge</span>
+            </div>
+            <p class="card-description">Zigbee to MQTT bridge for smart home devices. Control Zigbee devices from any MQTT-enabled platform without vendor cloud dependencies.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/blakeblackshear/frigate" target="_blank" rel="noopener">Frigate</a></h4>
+              <span class="card-badge">NVR</span>
+            </div>
+            <p class="card-description">NVR with real-time local object detection for IP cameras. AI-powered security camera system with person/vehicle detection using Google Coral.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Infrastructure -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Infrastructure</h3>
+          <span class="count">6 apps</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/traefik/traefik" target="_blank" rel="noopener">Traefik</a></h4>
+              <span class="card-badge">Proxy</span>
+            </div>
+            <p class="card-description">Cloud native application proxy and load balancer. Automatic service discovery with Let's Encrypt, Docker, and Kubernetes integration.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/caddyserver/caddy" target="_blank" rel="noopener">Caddy</a></h4>
+              <span class="card-badge">Reverse Proxy</span>
+            </div>
+            <p class="card-description">Fast web server with automatic HTTPS. Zero-configuration TLS with automatic certificate management and simple Caddyfile syntax.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/haproxy/haproxy" target="_blank" rel="noopener">HAProxy</a></h4>
+              <span class="card-badge">Load Balancer</span>
+            </div>
+            <p class="card-description">Reliable, high performance TCP/HTTP load balancer. Industry-standard load balancer with advanced health checking and traffic management.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/NginxProxyManager/nginx-proxy-manager" target="_blank" rel="noopener">Nginx Proxy Manager</a></h4>
+              <span class="card-badge">Proxy Management</span>
+            </div>
+            <p class="card-description">Docker-based Nginx reverse proxy with web UI. Easy SSL certificate management and proxy host configuration through intuitive interface.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/netbox-community/netbox-docker" target="_blank" rel="noopener">NetBox Docker</a></h4>
+              <span class="card-badge">IPAM/DCIM</span>
+            </div>
+            <p class="card-description">Docker Image of NetBox network documentation and management. Infrastructure resource modeling for IP addresses, racks, devices, and circuits.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/smallstep/certificates" target="_blank" rel="noopener">Smallstep</a></h4>
+              <span class="card-badge">Certificate Authority</span>
+            </div>
+            <p class="card-description">Private certificate authority and related tools. Run your own PKI for internal services with ACME support and short-lived certificates.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Malware Analysis -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Malware Analysis</h3>
+          <span class="count">4 apps</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/NationalSecurityAgency/ghidra" target="_blank" rel="noopener">Ghidra</a></h4>
+              <span class="card-badge">Reverse Engineering</span>
+            </div>
+            <p class="card-description">Software reverse engineering framework. NSA's powerful disassembler and decompiler with collaborative analysis features and extensible plugin architecture.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://hex-rays.com/ida-pro" target="_blank" rel="noopener">IDA Pro</a></h4>
+              <span class="card-badge">Reverse Engineering</span>
+            </div>
+            <p class="card-description">Powerful disassembler, decompiler and debugger. Industry-standard reverse engineering tool with advanced analysis capabilities and plugin ecosystem.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/cuckoosandbox/cuckoo" target="_blank" rel="noopener">Cuckoo Sandbox</a></h4>
+              <span class="card-badge">Sandbox</span>
+            </div>
+            <p class="card-description">Automated malware analysis system. Submit suspicious files for dynamic analysis with behavioral reports, network traffic capture, and memory analysis.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://www.wireshark.org/" target="_blank" rel="noopener">Wireshark</a></h4>
+              <span class="card-badge">Network Analysis</span>
+            </div>
+            <p class="card-description">Network protocol analyzer. Deep inspection of hundreds of protocols with live capture and offline analysis for network troubleshooting and security analysis.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Monitoring -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Monitoring</h3>
+          <span class="count">5 apps</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/prometheus/prometheus" target="_blank" rel="noopener">Prometheus</a></h4>
+              <span class="card-badge">Metrics</span>
+            </div>
+            <p class="card-description">Systems monitoring and alerting toolkit. Pull-based metrics collection with powerful query language, alerting, and extensive exporter ecosystem.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/grafana/grafana" target="_blank" rel="noopener">Grafana</a></h4>
+              <span class="card-badge">Visualization</span>
+            </div>
+            <p class="card-description">Open platform for analytics and monitoring. Beautiful dashboards with support for multiple data sources and extensive visualization options.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/louislam/uptime-kuma" target="_blank" rel="noopener">Uptime Kuma</a></h4>
+              <span class="card-badge">Uptime Monitoring</span>
+            </div>
+            <p class="card-description">Self-hosted monitoring tool like Uptime Robot. Monitor HTTP, TCP, DNS, and more with notifications to Slack, Telegram, Discord, and others.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/librenms/librenms" target="_blank" rel="noopener">LibreNMS</a></h4>
+              <span class="card-badge">SNMP</span>
+            </div>
+            <p class="card-description">Auto-discovering network monitoring and alerting platform. Full-featured network monitoring with SNMP polling, alerting, and extensive device support.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://www.observium.org/" target="_blank" rel="noopener">Observium</a></h4>
+              <span class="card-badge">Network Observation</span>
+            </div>
+            <p class="card-description">Low-maintenance auto-discovering network monitoring platform. Autodiscovery, automatic graphing, and intuitive interface for network monitoring.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reference -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Reference</h3>
+          <span class="count">10 apps</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/HackTricks-wiki/hacktricks" target="_blank" rel="noopener">HackTricks</a></h4>
+              <span class="card-badge">CTF & Pentesting</span>
+            </div>
+            <p class="card-description">Compilation of tricks/techniques for CTFs and pentesting. Comprehensive reference covering exploitation, privilege escalation, and security testing methodologies.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/GTFOBins/GTFOBins.github.io" target="_blank" rel="noopener">GTFOBins</a></h4>
+              <span class="card-badge">Unix Binaries</span>
+            </div>
+            <p class="card-description">Curated list of Unix binaries that can bypass security restrictions. Essential reference for privilege escalation through legitimate system utilities.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/trimstray/the-book-of-secret-knowledge" target="_blank" rel="noopener">The Book of Secret Knowledge</a></h4>
+              <span class="card-badge">Cheat Sheets</span>
+            </div>
+            <p class="card-description">Collection of inspiring lists, manuals, cheatsheets, blogs, hacks. Massive curated collection of security and sysadmin resources.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/bregman-arie/devops-exercises" target="_blank" rel="noopener">DevOps Exercises</a></h4>
+              <span class="card-badge">DevOps Learning</span>
+            </div>
+            <p class="card-description">Linux, Jenkins, AWS, SRE, Prometheus, Docker, Python, Ansible, Git, K8s exercises. Interview prep and learning resource with practical exercises.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/jlevy/the-art-of-command-line" target="_blank" rel="noopener">The Art of Command Line</a></h4>
+              <span class="card-badge">Command Line</span>
+            </div>
+            <p class="card-description">Master the command line in one page. Essential tips and tricks for becoming proficient in terminal usage across platforms.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/decalage2/awesome-security-hardening" target="_blank" rel="noopener">Awesome Security Hardening</a></h4>
+              <span class="card-badge">Hardening Guides</span>
+            </div>
+            <p class="card-description">Collection of security hardening guides, tools and resources. Comprehensive list covering OS, network, and application hardening.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/paragonie/awesome-appsec" target="_blank" rel="noopener">Awesome AppSec</a></h4>
+              <span class="card-badge">Application Security</span>
+            </div>
+            <p class="card-description">Curated list of resources for learning application security. Books, courses, tools, and resources for secure software development.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/jivoi/awesome-osint" target="_blank" rel="noopener">Awesome OSINT</a></h4>
+              <span class="card-badge">OSINT</span>
+            </div>
+            <p class="card-description">Curated list of amazingly awesome OSINT resources. Tools, techniques, and resources for open source intelligence gathering.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/krol3/container-security-checklist" target="_blank" rel="noopener">Container Security Checklist</a></h4>
+              <span class="card-badge">Container Security</span>
+            </div>
+            <p class="card-description">Checklist for container security - DevSecOps practices. Comprehensive security checklist for Docker and Kubernetes deployments.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/persistence-info/persistence-info.github.io" target="_blank" rel="noopener">Persistence Info</a></h4>
+              <span class="card-badge">Windows Persistence</span>
+            </div>
+            <p class="card-description">Windows persistence techniques documentation. Reference for understanding and detecting persistence mechanisms used by attackers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security Testing -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Security Testing</h3>
+          <span class="count">4 apps</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://portswigger.net/burp" target="_blank" rel="noopener">Burp Suite</a></h4>
+              <span class="card-badge">Web Testing</span>
+            </div>
+            <p class="card-description">Web application security testing platform. Industry-standard proxy tool for intercepting, analyzing, and modifying HTTP traffic with automated scanning.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/zaproxy/zaproxy" target="_blank" rel="noopener">OWASP ZAP</a></h4>
+              <span class="card-badge">Web</span>
+            </div>
+            <p class="card-description">Web application security scanner. Free and open-source alternative to Burp Suite with active scanning, API testing, and CI/CD integration.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://www.postman.com/" target="_blank" rel="noopener">Postman</a></h4>
+              <span class="card-badge">API Testing</span>
+            </div>
+            <p class="card-description">API development and testing platform. Comprehensive tool for API testing, documentation, and collaboration with automated testing capabilities.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/Kong/insomnia" target="_blank" rel="noopener">Insomnia</a></h4>
+              <span class="card-badge">API Testing</span>
+            </div>
+            <p class="card-description">API client for REST and GraphQL. Open-source alternative to Postman with environment management and request chaining.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIEM -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>SIEM</h3>
+          <span class="count">3 apps</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/wazuh/wazuh" target="_blank" rel="noopener">Wazuh</a></h4>
+              <span class="card-badge">XDR/SIEM</span>
+            </div>
+            <p class="card-description">Open source unified XDR and SIEM protection. Complete security platform with log analysis, intrusion detection, vulnerability assessment, and compliance monitoring.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/Graylog2/graylog2-server" target="_blank" rel="noopener">Graylog</a></h4>
+              <span class="card-badge">Log Management</span>
+            </div>
+            <p class="card-description">Free and open source log management platform. Centralized log collection, processing, and analysis with powerful search and alerting.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/elastic/kibana" target="_blank" rel="noopener">Elastic Security</a></h4>
+              <span class="card-badge">Security Analytics</span>
+            </div>
+            <p class="card-description">SIEM and endpoint security built on Elastic Stack. Threat detection, investigation, and response with machine learning and prebuilt detections.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Training Platforms -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>Training Platforms</h3>
+          <span class="count">8 apps</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://hs.hackthebox.com/" target="_blank" rel="noopener">Hack the Box</a></h4>
+              <span class="card-badge">CTF</span>
+            </div>
+            <p class="card-description">Online platform for penetration testing labs. Practice hacking skills on realistic vulnerable machines with guided learning paths and certifications.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://tryhackme.com/" target="_blank" rel="noopener">TryHackMe</a></h4>
+              <span class="card-badge">CTF</span>
+            </div>
+            <p class="card-description">Hands-on cyber security training platform. Beginner-friendly learning with guided rooms, browser-based attack boxes, and structured learning paths.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/JohnHammond/katana" target="_blank" rel="noopener">CTF Katana</a></h4>
+              <span class="card-badge">CTF Toolkit</span>
+            </div>
+            <p class="card-description">Automatic CTF challenge solver in Python. Framework for automating common CTF tasks with plugins for crypto, stego, forensics, and web challenges.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://overthewire.org/wargames/" target="_blank" rel="noopener">Over the Wire</a></h4>
+              <span class="card-badge">Wargames</span>
+            </div>
+            <p class="card-description">Learn and practice security concepts through games. Progressive wargames teaching Linux, networking, and security fundamentals through hands-on challenges.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://pwnable.kr/" target="_blank" rel="noopener">PwnAble</a></h4>
+              <span class="card-badge">CTF</span>
+            </div>
+            <p class="card-description">Wargame site for exploitation challenges. Binary exploitation and system security challenges ranging from beginner to advanced difficulty.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://pentesterlab.com/" target="_blank" rel="noopener">Pentester Lab</a></h4>
+              <span class="card-badge">Web Security</span>
+            </div>
+            <p class="card-description">Learn penetration testing through hands-on exercises. Focused web security training with vulnerable applications and detailed explanations.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://picoctf.org/" target="_blank" rel="noopener">PicoCTF</a></h4>
+              <span class="card-badge">CTF</span>
+            </div>
+            <p class="card-description">Free computer security education program with CTF. Beginner-friendly challenges covering forensics, cryptography, web exploitation, and reverse engineering.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://crackmes.one/" target="_blank" rel="noopener">CrackMe</a></h4>
+              <span class="card-badge">Reverse Engineering</span>
+            </div>
+            <p class="card-description">Download crackmes to improve reverse engineering skills. Community-submitted challenges for practicing binary analysis and cracking techniques.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VPN -->
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div style="display: flex; align-items: center;">
+          <h3>VPN</h3>
+          <span class="count">3 apps</span>
+        </div>
+        <span class="chevron">&#9660;</span>
+      </div>
+      <div class="accordion-content">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/WireGuard" target="_blank" rel="noopener">WireGuard</a></h4>
+              <span class="card-badge">Modern VPN</span>
+            </div>
+            <p class="card-description">Fast, modern, secure VPN tunnel. Extremely simple and fast VPN with state-of-the-art cryptography and minimal attack surface.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/juanfont/headscale" target="_blank" rel="noopener">Headscale</a></h4>
+              <span class="card-badge">Tailscale Controller</span>
+            </div>
+            <p class="card-description">Open source self-hosted Tailscale control server. Run your own coordination server for Tailscale mesh VPN without vendor dependency.</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><a href="https://github.com/netbirdio/netbird" target="_blank" rel="noopener">NetBird</a></h4>
+              <span class="card-badge">Zero-Trust Network</span>
+            </div>
+            <p class="card-description">WireGuard-based mesh network. Connect devices into single private network with SSO integration and zero-trust network access.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Jack Smith. All rights reserved.</p>
+    <p>Connect with me via <a href="mailto:contact@vulnsmith.com" style="color: var(--accent-color); text-decoration: none;">email</a> or follow me on <a href="https://www.linkedin.com/in/vulnsmith/" style="color: var(--accent-color); text-decoration: none;">LinkedIn</a>.</p>
+  </footer>
+
+  <script>
+    function toggleAccordion(header) {
+      const accordion = header.parentElement;
+      accordion.classList.toggle('open');
+    }
+  </script>
+</body>
+
+</html>
