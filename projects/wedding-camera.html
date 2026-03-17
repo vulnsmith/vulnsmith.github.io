@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Wedding Camera — a disposable camera iOS app for weddings by Jack Smith." />
+  <title>vulnsmith | Wedding Camera</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="../css/pages.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <nav style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem;">
+      <div style="font-weight: bold; font-size: 1.15rem; letter-spacing: 0.02em;">
+        <span style="font-weight: bold; font-size: 1.15rem;">Jack Smith</span> <span style="font-weight: 400; color: #888;">| vulnsmith</span>
+      </div>
+      <div style="display: flex; gap: 2rem;">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../projects.html" class="active">Projects</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../apps.html">Applications</a>
+        <a href="../tools.html">Tools</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="project-detail">
+
+    <a class="back-link" href="../projects.html">← All Projects</a>
+
+    <div class="project-detail-hero">
+      <img class="project-detail-icon" src="../assets/images/wedding-camera-icon.png" alt="Wedding Camera app icon" />
+      <div>
+        <h1>Wedding Camera</h1>
+        <div class="project-badge-row">
+          <span class="project-badge badge-ios">iOS</span>
+          <span class="project-badge badge-swift">Swift</span>
+          <span class="project-badge badge-aws">AWS</span>
+          <span class="project-badge badge-open">Open Source</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="project-detail-desc">A disposable camera app for weddings, distributed via TestFlight to guests. Guests enter their name, choose a film mode, and start shooting. Photos are processed through a Core Image filter chain, saved to Camera Roll, and uploaded silently to a private S3 album — no AWS credentials ever touch the device.</p>
+
+    <div class="project-section">
+      <h2>Features</h2>
+      <ul class="feature-list">
+        <li>Two film modes — Disposable (27 shots, film grain + warm tone) and Polaroid (10 shots, white frame composite with developing animation)</li>
+        <li>Core Image filter chains applied before save: desaturate, colour warm, grain, and vignette per mode</li>
+        <li>Offline-resilient upload queue backed by disk; photos are cached immediately and retried on reconnect via NWPathMonitor</li>
+        <li>Presigned S3 PUT URLs generated server-side by a Lambda function — no AWS credentials on device</li>
+        <li>Photos saved to Camera Roll automatically; guest name used to namespace the S3 key</li>
+        <li>Shot limits enforced per mode; "out of film" screen shown when exhausted</li>
+        <li>Onboarding with name entry; instructions screen on first launch</li>
+        <li>Full SwiftUI test suite covering upload, queue, filters, and UI flows</li>
+      </ul>
+    </div>
+
+    <div class="project-section">
+      <h2>Architecture</h2>
+      <ul class="feature-list">
+        <li><strong>CameraService</strong> — @MainActor AVCaptureSession with delegate dispatch back to main thread</li>
+        <li><strong>FilterService</strong> — Core Image pipeline; Polaroid frame baked via Core Graphics composite</li>
+        <li><strong>UploadQueue (actor)</strong> — persists JPEGs to Library/Caches with JSON manifest before upload attempt</li>
+        <li><strong>UploadService</strong> — fetches fresh presign URL per upload (15-min TTL), 1 retry on failure, silent fail</li>
+        <li><strong>NetworkMonitor</strong> — NWPathMonitor bridge; calls UploadQueue.flush() on reconnect and app foreground</li>
+        <li><strong>Lambda (Node.js)</strong> — createHandler factory pattern for injectability; sanitises guest name before building S3 key</li>
+      </ul>
+    </div>
+
+    <div class="project-section">
+      <h2>Tech Stack</h2>
+      <div class="tech-grid">
+        <span class="tech-pill">Swift 6</span>
+        <span class="tech-pill">SwiftUI</span>
+        <span class="tech-pill">AVFoundation</span>
+        <span class="tech-pill">Core Image</span>
+        <span class="tech-pill">Core Graphics</span>
+        <span class="tech-pill">NWPathMonitor</span>
+        <span class="tech-pill">Node.js</span>
+        <span class="tech-pill">AWS Lambda</span>
+        <span class="tech-pill">Amazon S3</span>
+        <span class="tech-pill">API Gateway</span>
+        <span class="tech-pill">Terraform</span>
+        <span class="tech-pill">TestFlight</span>
+        <span class="tech-pill">XcodeGen</span>
+        <span class="tech-pill">GitHub Actions</span>
+      </div>
+    </div>
+
+    <div class="project-section">
+      <h2>Links</h2>
+      <div class="project-links">
+        <a class="project-link-btn btn-primary" href="https://github.com/vulnsmith/polaroid" target="_blank" rel="noopener">GitHub →</a>
+        <a class="project-link-btn btn-secondary" href="wedding-camera-privacy.html">Privacy Policy</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Jack Smith. All rights reserved.</p>
+    <p>Connect with me via <a href="mailto:contact@vulnsmith.com" style="color: var(--accent-color); text-decoration: none;">email</a> or follow me on <a href="https://www.linkedin.com/in/vulnsmith/" style="color: var(--accent-color); text-decoration: none;">LinkedIn</a>.</p>
+  </footer>
+</body>
+
+</html>

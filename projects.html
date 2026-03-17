@@ -29,12 +29,33 @@
     </nav>
   </header>
 
-  <main>
-    <section id="projects">
-      <h2>My Projects</h2>
-      <p>Here you will find a collection of my projects, showcasing my skills in cybersecurity, cloud automation, and secure system design. Each project reflects my commitment to building robust and scalable solutions.</p>
-      <p>Stay tuned for detailed descriptions and links to the repositories!</p>
-    </section>
+  <main class="projects-container">
+    <h2>Projects</h2>
+    <p class="projects-intro">Personal builds spanning iOS, cloud infrastructure, and security tooling. Each project reflects a real problem I wanted to solve.</p>
+
+    <div class="project-grid">
+
+      <a class="project-card" href="projects/wedding-camera.html">
+        <div class="project-card-header">
+          <img class="project-card-icon" src="assets/images/wedding-camera-icon.png" alt="Wedding Camera app icon" />
+          <div class="project-card-meta">
+            <h3>Wedding Camera</h3>
+            <div class="project-badge-row">
+              <span class="project-badge badge-ios">iOS</span>
+              <span class="project-badge badge-swift">Swift</span>
+              <span class="project-badge badge-aws">AWS</span>
+              <span class="project-badge badge-open">Open Source</span>
+            </div>
+          </div>
+        </div>
+        <p class="project-card-desc">A disposable camera app for weddings. Guests pick their name, choose between a 27-shot disposable or 10-shot Polaroid mode, and shoot. Photos are filtered, saved to Camera Roll, and uploaded silently to a private S3 album — no AWS credentials on device.</p>
+        <div class="project-card-footer">
+          View project →
+          <span>SwiftUI · AVFoundation · Lambda</span>
+        </div>
+      </a>
+
+    </div>
   </main>
 
   <footer>
