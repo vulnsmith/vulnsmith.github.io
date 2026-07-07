@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Part three of an enterprise AI governance series on implementing identity, DLP, behavioral prevention, Purview, Power Platform, SIEM monitoring, Entra ID, and data governance for agentic AI." />
+  <title>Implementing Agentic AI Controls in the Microsoft Stack | vulnsmith</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem("vulnsmith-theme");
+        if (!theme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
+        document.documentElement.dataset.theme = theme ? theme : "light";
+      } catch (error) {
+        document.documentElement.dataset.theme = "light";
+      }
+    }());
+  </script>
+  <link href="/css/pages.css?v=20260707-5" rel="stylesheet">
+  <script defer src="/js/theme-toggle.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem;">
+      <div style="font-weight: bold; font-size: 1.15rem; letter-spacing: 0.02em;">
+        <span style="font-weight: bold; font-size: 1.15rem;">Jack Smith</span> <span class="brand-muted" style="font-weight: 400;">| vulnsmith</span>
+      </div>
+      <div class="nav-links">
+        <a href="/index.html">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/blog.html" class="active">Blog</a>
+        <a href="/apps.html">Applications</a>
+        <a href="/tools.html">Tools</a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" aria-pressed="false"><span data-theme-icon>🌙</span></button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="article-page">
+    <article class="article">
+      <header class="article-header">
+        <a class="article-back-link" href="/blog.html">Back to blog</a>
+        <p class="home-eyebrow">AI Governance</p>
+        <h1>AI Governance for Agentic Systems, Part 3: Implementing Controls in the Microsoft Stack</h1>
+        <p class="article-dek">Governance becomes real when it is enforced through identity, DLP, monitoring, and data controls. In Microsoft environments, that means wiring Purview, Power Platform, Entra ID, SIEM telemetry, and data governance into one operating model.</p>
+        <div class="article-meta">
+          <span>Jack Smith</span>
+          <span>June 24, 2026</span>
+          <span>Enterprise AI governance series</span>
+        </div>
+      </header>
+
+      <figure class="article-figure">
+        <img src="/assets/images/microsoft-agentic-controls-stack.svg?v=20260707-2" alt="Layered Microsoft agentic AI controls stack">
+        <figcaption>Agentic AI controls need to layer data governance, environment controls, identity policy, and runtime monitoring instead of relying on prompt guidance alone.</figcaption>
+      </figure>
+
+      <section>
+        <p>Part two made the case that Microsoft's agentic AI lifecycle is really an accountability system. This part is the implementation view. The point is not to collect every Microsoft control and call it strategy. The point is to decide which controls prevent the agent from doing the wrong thing, which controls detect when it does, and which controls prove the organization was governing the system over time.</p>
+        <p>For most Microsoft-heavy enterprises, the control plane already exists in pieces. Purview knows about labels, DLP, audit, eDiscovery, and data governance. Power Platform knows about environments, connectors, solutions, and maker activity. Entra ID knows about users, groups, applications, access policy, and privileged roles. SIEM tooling such as Microsoft Sentinel can correlate behavior. The missing work is stitching those pieces into an agentic operating model.</p>
+        <div class="article-callout">
+          <strong>Implementation lens</strong>
+          <p>Do not start with a product checklist. Start with the behaviors you need to prevent, detect, explain, and recover from.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Start With Data Governance Before Agent Governance</h2>
+        <p>Agentic AI exposes weak data governance quickly. If a document library is open to too many users, an agent grounded in Microsoft 365 can make that oversharing easier to discover. If sensitivity labels are inconsistent, the organization cannot reliably express which content is confidential, regulated, public, or restricted. If ownership is stale, no one can approve whether a knowledge source belongs in an agent.</p>
+        <p>The first implementation step is therefore boring and essential: clean up the data estate. Classify sensitive repositories. Fix excessive permissions. Apply sensitivity labels where they matter. Establish retention and records expectations. Identify authoritative sources. Make business owners responsible for the data their agents use.</p>
+        <p>Purview helps here because it can provide labels, audit, data lifecycle controls, information protection, compliance search, and governance signals. Those controls should become prerequisites for higher-risk agents. If an agent will be grounded in sensitive content, the content should have an owner, a classification, an access model, and an audit trail before the agent is published.</p>
+        <div class="article-card-grid">
+          <div class="article-mini-card">
+            <strong>Classify</strong>
+            <p>Label content that agents may summarize, retrieve, or reason over.</p>
+          </div>
+          <div class="article-mini-card">
+            <strong>Clean up</strong>
+            <p>Reduce overshared libraries and stale permissions before rollout.</p>
+          </div>
+          <div class="article-mini-card">
+            <strong>Assign owners</strong>
+            <p>Make a human accountable for each high-value data source.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Use Power Platform as the Maker Control Plane</h2>
+        <p>Copilot Studio agents live close to Power Platform governance, so Power Platform should be treated as the maker control plane. That starts with environment strategy. Default environments should not become production. Development, test, and production environments should be separated. Managed environments should be used where production governance matters. Sensitive connectors should be restricted to the right environments and approved audiences.</p>
+        <p>DLP policies are central because connectors are where agents cross boundaries. A policy that allows business data connectors to mix freely with consumer or unmanaged connectors can accidentally create an exfiltration path. A better pattern is to group connectors by data sensitivity and business purpose, block or isolate risky connectors, and require review before a connector can be used by a production agent.</p>
+        <p>Solutions matter too. Production agents should be packaged, reviewed, and deployed through solutions so dependencies, connection references, environment variables, and version changes are visible. The organization should know when a maker changed a topic, added a knowledge source, introduced an action, or connected the agent to a new system.</p>
+      </section>
+
+      <section>
+        <h2>Make Entra ID the Identity Gate</h2>
+        <p>Entra ID should define who can build, who can publish, who can administer, and who can use agents. Groups should map to maker roles, environment roles, admin roles, security review roles, and approved user audiences. Conditional Access should protect privileged administration paths. Privileged Identity Management should be used for elevated roles where possible.</p>
+        <p>The most important design decision is whether an agent acts with delegated user permissions, an application identity, or a shared connector connection. Delegated access usually preserves user-level boundaries. Application identity can be appropriate for backend automation, but it needs least privilege and strong ownership. Shared high-privilege connections are the danger zone and should require explicit risk acceptance, monitoring, and scheduled review.</p>
+        <p>Identity controls should also cover retirement. When an agent is decommissioned, its app registrations, secrets, certificates, connector connections, group assignments, and privileged roles should be removed. A retired agent with living credentials is just abandoned automation.</p>
+      </section>
+
+      <section>
+        <h2>Turn DLP Into Behavioral Prevention</h2>
+        <p>DLP is often treated as a data leakage control after the fact. For agentic AI, it should also be part of behavioral prevention. The organization should decide which data classes can be used for grounding, which can be sent to which connectors, which outputs require labels, and which actions require human approval.</p>
+        <p>Purview DLP can help protect sensitive content across Microsoft 365 workloads. Power Platform DLP can control connector combinations and block risky data movement patterns. Sensitivity labels can drive user expectations, access controls, encryption, and downstream handling. Together, these controls can make certain agent behaviors impossible or at least visible enough to stop.</p>
+        <p>The implementation pattern is to map policy to behavior. Confidential data should not flow into unmanaged connectors. Regulated data should require approved environments. Customer-impacting actions should require approval or strong scoping. High-risk prompts, actions, and connector calls should produce logs that security can investigate.</p>
+        <div class="article-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Risky Agent Behavior</th>
+                <th>Preventive Control</th>
+                <th>Detection Signal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Confidential data sent through unmanaged connectors.</td>
+                <td>Power Platform DLP connector grouping and blocked connector policy.</td>
+                <td>DLP event, connector invocation, unusual data movement.</td>
+              </tr>
+              <tr>
+                <td>Agent acts through overly broad credentials.</td>
+                <td>Least-privilege app identity, delegated access, PIM for admin paths.</td>
+                <td>Entra sign-in logs, privilege changes, anomalous service principal activity.</td>
+              </tr>
+              <tr>
+                <td>New knowledge source changes the agent's risk.</td>
+                <td>Solution review, data owner approval, environment gate.</td>
+                <td>Solution change, source inventory update, Purview audit event.</td>
+              </tr>
+              <tr>
+                <td>Agent behavior drifts after deployment.</td>
+                <td>Runtime limits, human approval for consequential actions, owner review.</td>
+                <td>SIEM alert, failed action spike, new connector or audience pattern.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>Monitor Agents Like Production Automation</h2>
+        <p>Agent monitoring should not stop at usage counts. A production agent needs telemetry that can answer operational and security questions. Who used it? What identity did it act under? What topics or actions were invoked? What connector calls happened? What data sources were used? Did the agent fail closed or continue after an error? Did usage spike? Did it start touching a new data domain?</p>
+        <p>SIEM monitoring is where those signals become useful. Microsoft Sentinel, Defender, Purview audit, Power Platform activity, Entra sign-in logs, and connector telemetry can be correlated into detections. Useful detections include unusual agent usage, new high-risk connectors, excessive failed actions, access from risky locations, privilege changes before agent activity, sensitive label conflicts, and data movement between business and unmanaged connectors.</p>
+        <p>Monitoring also needs ownership. Alerts without an owner become noise. Each production agent should have an incident contact, severity model, expected behavior baseline, and documented response path. For high-risk agents, that response path should include disabling the agent, revoking connections, removing app credentials, and preserving audit evidence.</p>
+      </section>
+
+      <section>
+        <h2>Governance Evidence Matters</h2>
+        <blockquote class="article-pullquote">If the organization cannot reconstruct why an agent was allowed to act, it does not have agent governance. It has agent drift.</blockquote>
+        <p>Enterprise governance is partly about making good decisions and partly about proving those decisions happened. For agentic AI, evidence should be collected across the lifecycle: intake record, risk tier, owner approval, data source approval, identity model, DLP review, test evidence, release approval, monitoring requirements, incident history, access reviews, and retirement record.</p>
+        <p>This does not need to be heavyweight for every agent. A small internal FAQ agent should not go through the same process as an agent that updates customer records. But the evidence model should scale with risk. The higher the autonomy, data sensitivity, and business impact, the more proof the organization should require.</p>
+        <p>The practical win is that the same evidence supports security review, audit, incident response, and platform operations. When someone asks why an agent was allowed to exist, the answer should not be buried in chat history or tribal memory.</p>
+      </section>
+
+      <section>
+        <h2>A Workable Control Baseline</h2>
+        <p>A strong baseline for Microsoft agentic AI includes an agent inventory, managed environment strategy, Power Platform DLP, Purview sensitivity labels, Entra group-based role assignment, approved connector catalog, solution-based deployment, owner approval, monitoring requirements, and retirement procedure.</p>
+        <p>From there, add controls by risk tier. Sensitive agents need data owner approval and DLP validation. Action-taking agents need human approval gates or scoped automation identities. Broadly available agents need stronger testing and communication. Privileged agents need PIM, least privilege, SIEM detections, and formal incident runbooks.</p>
+        <p>The goal is a system where agent builders can move quickly inside known boundaries, and security teams can see, constrain, and respond without becoming the manual bottleneck for every experiment.</p>
+      </section>
+
+      <section>
+        <h2>Closing the Series</h2>
+        <p>MAESTRO and ATF provide the governance language. Microsoft's ALM model gives enterprises a deployment path. Purview, Power Platform, Entra, SIEM monitoring, and data governance turn that path into enforceable controls.</p>
+        <p>That is the pattern to carry forward: agents need identities, data boundaries, tool boundaries, behavior monitoring, and lifecycle ownership. Anything less is not agentic governance. It is hope with a chatbot attached.</p>
+      </section>
+
+      <section class="article-sources">
+        <h2>Further Reading</h2>
+        <p><a href="https://learn.microsoft.com/en-us/purview/information-protection">Microsoft Learn: Microsoft Purview Information Protection</a></p>
+        <p><a href="https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention">Microsoft Learn: Data loss prevention policies for Power Platform</a></p>
+        <p><a href="https://learn.microsoft.com/en-us/entra/identity/conditional-access/overview">Microsoft Learn: Conditional Access in Microsoft Entra ID</a></p>
+        <p><a href="https://learn.microsoft.com/en-us/azure/sentinel/overview">Microsoft Learn: Microsoft Sentinel overview</a></p>
+        <p><a href="https://learn.microsoft.com/en-us/purview/audit-solutions-overview">Microsoft Learn: Microsoft Purview auditing solutions</a></p>
+      </section>
+
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Jack Smith. All rights reserved.</p>
+    <p>Connect with me via <a class="footer-link" href="mailto:contact@vulnsmith.com">email</a> or follow me on <a class="footer-link" href="https://www.linkedin.com/in/vulnsmith/">LinkedIn</a>.</p>
+  </footer>
+</body>
+
+</html>

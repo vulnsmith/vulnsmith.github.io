@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Part two of an enterprise AI governance series on Microsoft's agentic lifecycle model, Copilot governance, identity management, citizen development, and enterprise oversight." />
+  <title>Microsoft's Agentic AI Lifecycle Problem | vulnsmith</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem("vulnsmith-theme");
+        if (!theme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
+        document.documentElement.dataset.theme = theme ? theme : "light";
+      } catch (error) {
+        document.documentElement.dataset.theme = "light";
+      }
+    }());
+  </script>
+  <link href="/css/pages.css?v=20260707-5" rel="stylesheet">
+  <script defer src="/js/theme-toggle.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem;">
+      <div style="font-weight: bold; font-size: 1.15rem; letter-spacing: 0.02em;">
+        <span style="font-weight: bold; font-size: 1.15rem;">Jack Smith</span> <span class="brand-muted" style="font-weight: 400;">| vulnsmith</span>
+      </div>
+      <div class="nav-links">
+        <a href="/index.html">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/blog.html" class="active">Blog</a>
+        <a href="/apps.html">Applications</a>
+        <a href="/tools.html">Tools</a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" aria-pressed="false"><span data-theme-icon>🌙</span></button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="article-page">
+    <article class="article">
+      <header class="article-header">
+        <a class="article-back-link" href="/blog.html">Back to blog</a>
+        <p class="home-eyebrow">AI Governance</p>
+        <h1>AI Governance for Agentic Systems, Part 2: Microsoft's Agentic Lifecycle Problem</h1>
+        <p class="article-dek">Microsoft's Copilot stack gives enterprises a fast path to useful agents, but it also forces a hard governance question: how much builder freedom can the business tolerate before identity, data access, and runtime action become security problems?</p>
+        <div class="article-meta">
+          <span>Jack Smith</span>
+          <span>June 7, 2026</span>
+          <span>Enterprise AI governance series</span>
+        </div>
+      </header>
+
+      <figure class="article-figure">
+        <img src="/assets/images/microsoft-agentic-alm-governance.svg?v=20260707-2" alt="Diagram of Microsoft agentic AI lifecycle governance controls">
+        <figcaption>Agent lifecycle management has to bind builder freedom to identity, data, environment, approval, and monitoring controls before agents become operational software.</figcaption>
+      </figure>
+
+      <section>
+        <p>Part one covered MAESTRO and the Agentic Trust Framework as governance foundations. Those frameworks are useful because they force a sober shift in language. An agent is not just an assistant. It is a software actor that can be granted data, tools, memory, connectors, and business context.</p>
+        <p>Microsoft's ecosystem makes that shift very real. Copilot Chat gives users broad AI access. Microsoft 365 Copilot brings enterprise context through Microsoft Graph. Copilot Studio gives makers a low-code path to build agents and publish them into business workflows. Power Platform provides connectors, environments, solutions, and automation. Entra provides identity. Purview and Defender provide parts of the data and security control plane.</p>
+        <p>That is powerful. It is also why Microsoft's agentic lifecycle model cannot be treated as a developer convenience. Application lifecycle management for agents is enterprise security architecture wearing a low-code jacket.</p>
+        <blockquote class="article-pullquote">The ALM problem is not moving an agent between environments. It is proving that the agent earned the right to act.</blockquote>
+      </section>
+
+      <section>
+        <h2>The ALM Question Is Really an Accountability Question</h2>
+        <p>Traditional ALM asks how code moves from development to test to production. Agentic ALM has to ask more. Who owns the agent? Which human is accountable for its actions? Which identity does it use? Which data sources ground it? Which connectors can it call? Which prompts, topics, actions, and knowledge sources changed between versions? Who approved the promotion? What evidence proves the agent still behaves inside its intended business boundary?</p>
+        <p>In Copilot Studio and Power Platform, the mechanics are familiar: environments, solutions, connection references, environment variables, makers, managed deployment, and release gates. The risk is that teams mistake those mechanics for governance. Moving an agent through a solution pipeline is useful, but the pipeline itself does not answer whether the agent should be allowed to see HR records, summarize confidential email, call a ticketing API, or trigger a customer-facing workflow.</p>
+        <p>For agentic AI, ALM has to include identity review, data classification, connector governance, action authorization, prompt and knowledge source review, telemetry requirements, incident response expectations, and retirement. Build, test, deploy, and monitor are still there. They are just not sufficient by themselves.</p>
+        <div class="article-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Lifecycle Gate</th>
+                <th>What Security Should Ask</th>
+                <th>Evidence to Keep</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Intake</td>
+                <td>What business process, owner, audience, and data sensitivity justify the agent?</td>
+                <td>Owner record, risk tier, intended users, data source list.</td>
+              </tr>
+              <tr>
+                <td>Build</td>
+                <td>Which topics, actions, connectors, prompts, and knowledge sources are being introduced?</td>
+                <td>Solution package, dependencies, maker record, change notes.</td>
+              </tr>
+              <tr>
+                <td>Review</td>
+                <td>Does the identity model, connector use, and DLP posture match the risk tier?</td>
+                <td>Security review, DLP decision, identity approval, test evidence.</td>
+              </tr>
+              <tr>
+                <td>Run</td>
+                <td>Can the organization see drift, abuse, failed actions, and abandoned ownership?</td>
+                <td>Telemetry, incident contact, access review, retirement record.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>Identity Is the First Control Boundary</h2>
+        <p>Identity management is where many agent programs either become governable or become impossible to explain. Human users authenticate through Entra ID, but agents can also depend on app registrations, service principals, connector connections, delegated permissions, embedded credentials, and maker-owned connections. Every one of those choices changes the blast radius.</p>
+        <p>If an agent acts only with the current user's delegated permissions, the organization can lean on existing access controls, sensitivity labels, conditional access, and audit trails. That is cleaner, but it does not remove risk. It can still amplify oversharing if users already have broad access. If an agent uses a shared service account or high-privilege connection, the risk changes from user assistance to privileged automation. That requires a stronger review process, explicit ownership, credential rotation, privileged identity governance, and tighter monitoring.</p>
+        <p>A practical standard is simple: every production agent should have a named business owner, a technical owner, an approved identity model, a documented permission scope, and a lifecycle record that explains how access is granted, reviewed, and revoked. If an agent cannot pass that bar, it is not ready for production autonomy.</p>
+      </section>
+
+      <section>
+        <h2>Citizen Development Needs Guardrails, Not a Brick Wall</h2>
+        <p>Low-code AI creates a real tension. Citizen development is valuable because the people closest to the work can automate the work. A finance analyst knows the month-end pain. A service desk lead knows the intake mess. A compliance manager knows which questions keep coming back. Copilot Studio can turn that context into useful agents much faster than a centralized engineering queue.</p>
+        <p>The danger is not citizen development itself. The danger is citizen development without oversight. When makers can connect agents to business data, add actions, publish to channels, and iterate quickly, the organization can accumulate agent sprawl before security even knows what exists. The result is shadow automation: useful, popular, and operationally fragile.</p>
+        <p>The answer should not be to ban makers from building. That just pushes experimentation into less visible tools. The better answer is governed freedom: default environments for learning, managed environments for production, connector policies that separate business and non-business data paths, maker onboarding, solution-based deployment, approval gates for sensitive connectors, and inventory reporting that gives platform teams visibility without requiring them to hand-author every workflow.</p>
+        <div class="article-card-grid two-col">
+          <div class="article-mini-card">
+            <strong>Freedom that helps</strong>
+            <p>Makers can prototype with approved data, reusable templates, documented connectors, and visible environments.</p>
+          </div>
+          <div class="article-mini-card">
+            <strong>Freedom that hurts</strong>
+            <p>Makers can publish agents with unknown owners, broad connectors, stale credentials, and no operational review.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Copilot Is Under the Gun Across the Tiers</h2>
+        <p>Security teams should look at the Copilot family as a continuum, not as isolated products. Free or lightweight Copilot experiences can shape user habits and create a path for data movement. Microsoft 365 Copilot can reason over work content that may already be overshared. Copilot Studio can turn assistance into action by adding topics, knowledge, plugins, connectors, and workflows.</p>
+        <p>That is why Copilot Chat, Microsoft 365 Copilot, and Copilot Studio are all under scrutiny. The question is not whether Microsoft provides enterprise controls. The question is whether the tenant has implemented them coherently. If SharePoint permissions are loose, Copilot can expose the consequences faster. If sensitivity labeling is inconsistent, grounding and summarization become harder to reason about. If Power Platform environments are unmanaged, Copilot Studio agents can grow outside a release process. If connectors are permissive, an agent can bridge data domains that were never meant to meet.</p>
+        <p>Enterprises need to stop asking, "Is Copilot secure?" as if the product alone decides the outcome. The better question is, "Is our tenant ready for Copilot to make our existing access model, data hygiene, and automation governance visible at machine speed?"</p>
+      </section>
+
+      <section>
+        <h2>What Good Lifecycle Governance Looks Like</h2>
+        <p>A defensible Microsoft agentic ALM program starts with inventory. Every agent should be discoverable with owner, purpose, environment, data sources, knowledge sources, actions, connectors, channels, identity model, risk tier, and deployment status. Inventory is not paperwork. It is the control surface for review, monitoring, incident response, and retirement.</p>
+        <p>Next comes environment strategy. Personal experimentation should be separated from shared development, test, and production. Sensitive connectors should require managed environments and approval. Production agents should be deployed through solutions, not rebuilt by hand. Connection references and environment variables should make dependencies visible. Changes to prompts, actions, topics, and knowledge sources should be treated as release-relevant changes.</p>
+        <p>Finally, governance has to follow the agent after launch. Runtime telemetry, user feedback, audit logs, DLP events, connector usage, failed actions, unexpected topic paths, and permission changes all matter. An agent that was acceptable at launch can become risky after a new connector, a new data source, a new audience, or a change in business process.</p>
+      </section>
+
+      <section>
+        <h2>The Security Posture to Aim For</h2>
+        <p>The goal is not to smother agentic AI with process. The goal is to let useful agents reach production without pretending they are harmless chat widgets. The enterprise posture should be proportional: more autonomy, more data sensitivity, more connector power, and more business impact should trigger stronger controls.</p>
+        <div class="article-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Risk Tier</th>
+                <th>Typical Agent</th>
+                <th>Minimum Governance Bar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Low</td>
+                <td>Internal FAQ, policy explainer, read-only help agent.</td>
+                <td>Owner, approved source, environment placement, feedback loop.</td>
+              </tr>
+              <tr>
+                <td>Medium</td>
+                <td>Agent using business connectors or department data.</td>
+                <td>DLP review, solution deployment, connector approval, test record.</td>
+              </tr>
+              <tr>
+                <td>High</td>
+                <td>Agent taking action in customer, finance, HR, or security workflows.</td>
+                <td>Risk acceptance, least privilege, approval gates, SIEM monitoring, runbook.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>That is the practical center of Microsoft's agentic lifecycle problem. Copilot lowers the cost of creating agents. Enterprise governance has to lower the cost of managing them safely.</p>
+      </section>
+
+      <section>
+        <h2>Part 3 Preview</h2>
+        <p>Part three turns this governance model into implementation. We will look at how Purview, Power Platform, Entra ID, SIEM monitoring, and data governance can become the control plane for identity, DLP, and behavioral prevention across agentic AI.</p>
+      </section>
+
+      <section class="article-sources">
+        <h2>Further Reading</h2>
+        <p><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/application-lifecycle-management">Microsoft Learn: Application lifecycle management for Microsoft Copilot Studio</a></p>
+        <p><a href="https://learn.microsoft.com/en-us/power-platform/admin/wp-copilot-studio-security-governance">Microsoft Learn: Security and governance considerations for Microsoft Copilot Studio</a></p>
+        <p><a href="https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention">Microsoft Learn: Data loss prevention policies for Power Platform</a></p>
+        <p><a href="https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy">Microsoft Learn: Data, privacy, and security for Microsoft 365 Copilot</a></p>
+      </section>
+
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Jack Smith. All rights reserved.</p>
+    <p>Connect with me via <a class="footer-link" href="mailto:contact@vulnsmith.com">email</a> or follow me on <a class="footer-link" href="https://www.linkedin.com/in/vulnsmith/">LinkedIn</a>.</p>
+  </footer>
+</body>
+
+</html>

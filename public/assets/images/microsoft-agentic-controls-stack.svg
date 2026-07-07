@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Microsoft controls for agentic AI implementation</title>
+  <desc id="desc">A readable control stack mapping Purview, Power Platform, Entra ID, and SIEM monitoring to agent governance outcomes.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fbfcff"/>
+      <stop offset="1" stop-color="#eef7f3"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-18%" width="130%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#223040" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="720" rx="28" fill="url(#bg)"/>
+  <text x="72" y="78" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#172033">Agentic AI Control Plane in Microsoft 365</text>
+  <text x="72" y="116" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#596676">Layer the controls so agents inherit data, identity, runtime, and response boundaries.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="78" y="156" width="1044" height="430" rx="22" fill="#ffffff" stroke="#d8e2ec"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="130" y="214" width="250" height="250" rx="18" fill="#eff6ff" stroke="#7db5e9" stroke-width="2"/>
+    <text x="255" y="258" text-anchor="middle" font-size="26" font-weight="700" fill="#17324d">Purview</text>
+    <text x="255" y="296" text-anchor="middle" font-size="17" fill="#465f78">Sensitivity labels</text>
+    <text x="255" y="326" text-anchor="middle" font-size="17" fill="#465f78">DLP policies</text>
+    <text x="255" y="356" text-anchor="middle" font-size="17" fill="#465f78">Audit evidence</text>
+    <text x="255" y="386" text-anchor="middle" font-size="17" fill="#465f78">Retention and eDiscovery</text>
+    <rect x="164" y="418" width="182" height="34" rx="17" fill="#ffffff" stroke="#bed8f3"/>
+    <text x="255" y="441" text-anchor="middle" font-size="15" font-weight="700" fill="#17324d">Data boundaries</text>
+
+    <rect x="475" y="214" width="250" height="250" rx="18" fill="#f3f0ff" stroke="#aa98e2" stroke-width="2"/>
+    <text x="600" y="258" text-anchor="middle" font-size="26" font-weight="700" fill="#31274d">Power Platform</text>
+    <text x="600" y="296" text-anchor="middle" font-size="17" fill="#5d5373">Managed environments</text>
+    <text x="600" y="326" text-anchor="middle" font-size="17" fill="#5d5373">Connector groups</text>
+    <text x="600" y="356" text-anchor="middle" font-size="17" fill="#5d5373">Solution deployment</text>
+    <text x="600" y="386" text-anchor="middle" font-size="17" fill="#5d5373">Maker inventory</text>
+    <rect x="509" y="418" width="182" height="34" rx="17" fill="#ffffff" stroke="#cdc0ef"/>
+    <text x="600" y="441" text-anchor="middle" font-size="15" font-weight="700" fill="#31274d">Build boundaries</text>
+
+    <rect x="820" y="214" width="250" height="250" rx="18" fill="#effaf2" stroke="#86ca94" stroke-width="2"/>
+    <text x="945" y="258" text-anchor="middle" font-size="26" font-weight="700" fill="#163e24">Entra ID</text>
+    <text x="945" y="296" text-anchor="middle" font-size="17" fill="#496552">Conditional Access</text>
+    <text x="945" y="326" text-anchor="middle" font-size="17" fill="#496552">Groups and roles</text>
+    <text x="945" y="356" text-anchor="middle" font-size="17" fill="#496552">App identities</text>
+    <text x="945" y="386" text-anchor="middle" font-size="17" fill="#496552">Privileged access</text>
+    <rect x="854" y="418" width="182" height="34" rx="17" fill="#ffffff" stroke="#b9e2c2"/>
+    <text x="945" y="441" text-anchor="middle" font-size="15" font-weight="700" fill="#163e24">Identity boundaries</text>
+  </g>
+
+  <g fill="none" stroke="#73879a" stroke-width="3" stroke-linecap="round">
+    <path d="M380 340h95"/>
+    <path d="M725 340h95"/>
+  </g>
+  <g fill="#73879a">
+    <path d="M466 330l18 10-18 10z"/>
+    <path d="M811 330l18 10-18 10z"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="170" y="510" width="860" height="52" rx="26" fill="#172033"/>
+    <text x="600" y="544" text-anchor="middle" font-size="19" font-weight="700" fill="#ffffff">SIEM monitoring ties behavior, identity, data movement, and response into one evidence trail.</text>
+    <rect x="212" y="610" width="776" height="48" rx="24" fill="#ffffff" stroke="#d8e2ec"/>
+    <text x="600" y="641" text-anchor="middle" font-size="18" font-weight="700" fill="#172033">Outcome: prevent risky actions, detect drift, prove governance, and retire abandoned agents.</text>
+  </g>
+</svg>

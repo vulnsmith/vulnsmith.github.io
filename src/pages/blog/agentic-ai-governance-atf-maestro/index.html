@@ -51,13 +51,13 @@
         <p class="article-dek">Enterprise AI governance gets harder when an AI system can reason, select tools, touch data, call APIs, and take action. Two useful models help bring order to that problem: MAESTRO for threat modeling and the Agentic Trust Framework for operational control.</p>
         <div class="article-meta">
           <span>Jack Smith</span>
-          <span>July 7, 2026</span>
+          <span>May 19, 2026</span>
           <span>Enterprise AI governance series</span>
         </div>
       </header>
 
       <figure class="article-figure">
-        <img src="/assets/images/agentic-governance-atf-maestro.svg" alt="Diagram showing MAESTRO feeding risk decisions and ATF controls for agentic AI governance">
+        <img src="/assets/images/agentic-governance-atf-maestro.svg?v=20260707-2" alt="Diagram showing MAESTRO feeding risk decisions and ATF controls for agentic AI governance">
         <figcaption>MAESTRO helps identify agentic AI risk across the architecture. ATF turns that risk understanding into identity, behavior, data, segmentation, and response controls.</figcaption>
       </figure>
 
@@ -66,6 +66,10 @@
         <p>An agent is not just a chatbot with better branding. In enterprise terms, an agent is a software actor that can interpret a goal, choose a path, use tools, retrieve or transform data, invoke APIs, and sometimes execute changes in business systems. That makes agentic AI closer to a privileged automation worker than a passive application feature.</p>
         <p>This is why AI governance needs to move from policy documents into enforceable control planes. The questions become concrete: Which agent is acting? Who owns it? What data can it see? Which tools can it call? What business process is it allowed to influence? How do we know whether its behavior changed? Who can stop it quickly?</p>
         <p>Two Cloud Security Alliance frameworks are useful starting points for answering those questions. MAESTRO gives teams a structured way to model threats across agentic AI architecture. The Agentic Trust Framework gives teams a zero trust governance model for deciding how much autonomy an agent should earn and what controls must surround it.</p>
+        <div class="article-callout">
+          <strong>How to read this post</strong>
+          <p>Part one is the map. It names the risk model and control model before the series moves into Microsoft lifecycle governance and implementation.</p>
+        </div>
       </section>
 
       <section>
@@ -92,6 +96,24 @@
         <p>The CSA article presents five core ATF elements as simple governance questions: Who are you? What are you doing? What are you eating and serving? Where can you go? What happens if you go rogue?</p>
         <p>Those questions map neatly to enterprise controls. Identity requires unique agent identifiers, credential binding, ownership, purpose declarations, and capability manifests. Behavior requires structured logs, action attribution, baselines, anomaly detection, and explainability. Data governance requires input validation, injection prevention, sensitive data protection, output validation, and lineage. Segmentation requires allowlists, action boundaries, rate limits, transaction limits, and blast radius containment. Incident response requires circuit breakers, kill switches, session revocation, rollback where possible, and graceful degradation.</p>
         <p>ATF also introduces a maturity model for autonomy. Agents do not jump straight from prototype to unsupervised execution. They move through levels such as observe-only, recommend-with-approval, bounded autonomous execution, and domain-level autonomy. Promotion requires evidence: performance, security validation, business value, clean incident history, and governance sign-off.</p>
+      </section>
+
+      <section>
+        <h2>The Three Decisions That Matter</h2>
+        <div class="article-card-grid">
+          <div class="article-mini-card">
+            <strong>What can the agent know?</strong>
+            <p>Grounding, retrieval, memory, and context define the data risk before the agent ever takes an action.</p>
+          </div>
+          <div class="article-mini-card">
+            <strong>What can the agent do?</strong>
+            <p>Tools, APIs, plugins, connectors, and workflow actions turn a chat experience into operational software.</p>
+          </div>
+          <div class="article-mini-card">
+            <strong>Who is accountable?</strong>
+            <p>Owners, identities, approval records, telemetry, and response paths decide whether autonomy is defensible.</p>
+          </div>
+        </div>
       </section>
 
       <section>
@@ -143,6 +165,7 @@
 
       <section>
         <h2>A Practical Enterprise Control Pattern</h2>
+        <blockquote class="article-pullquote">Guardrails are not prompt instructions. They are enforceable boundaries around identity, data, tools, behavior, and response.</blockquote>
         <p>A useful first implementation does not need to be exotic. Start with an agent inventory that records owner, purpose, business process, data touched, tools available, model/provider, deployment environment, and autonomy level. Require a MAESTRO-style threat model before production use. Assign an ATF maturity level and prohibit agents from exceeding that level without documented approval.</p>
         <p>For low-risk agents, the control set may be simple: identity, source approval, logging, data classification checks, read-only access, and human review before action. For higher-risk agents, add tool allowlists, policy-as-code, ABAC, output validation, PII detection, transaction limits, streaming telemetry, anomaly alerts, kill switches, rollback plans, adversarial testing, and risk committee approval.</p>
         <p>This also gives enterprises a clean way to talk about AI guardrails. Guardrails are not just prompt instructions. Real guardrails include identity boundaries, data boundaries, tool boundaries, autonomy boundaries, behavioral monitoring, and response boundaries. The closer an agent gets to autonomous action, the more those guardrails need to be enforced outside the model itself.</p>
@@ -150,7 +173,7 @@
 
       <section>
         <h2>Part 2 Preview</h2>
-        <p>This post focused on the governance and threat modeling foundation: MAESTRO for understanding risk and ATF for controlling trust. In part two, we will move from governance architecture into agent lifecycle management, including Microsoft's agent lifecycle framework and the practical operational questions that come with building, deploying, monitoring, and retiring enterprise agents.</p>
+        <p>This post focused on the governance and threat modeling foundation: MAESTRO for understanding risk and ATF for controlling trust. In part two, we move from governance architecture into Microsoft's agent lifecycle management model and the practical operational questions that come with building, deploying, monitoring, and retiring enterprise agents.</p>
       </section>
 
       <section class="article-sources">

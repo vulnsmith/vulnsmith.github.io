@@ -28,8 +28,8 @@
     <text x="100" y="232" fill="#5f6168" font-family="Arial, Helvetica, sans-serif" font-size="15">Threat model the agent stack</text>
     <g font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#32343a">
       <text x="100" y="282">Layer 7: Agent ecosystem</text>
-      <text x="100" y="320">Layer 6: Security & compliance</text>
-      <text x="100" y="358">Layer 5: Evaluation & observability</text>
+      <text x="100" y="320">Layer 6: Security &amp; compliance</text>
+      <text x="100" y="358">Layer 5: Evaluation &amp; observability</text>
       <text x="100" y="396">Layer 4: Deployment infrastructure</text>
       <text x="100" y="434">Layer 3: Agent frameworks</text>
       <text x="100" y="472">Layer 2: Data operations</text>

@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Agent lifecycle governance model for Microsoft Copilot Studio</title>
+  <desc id="desc">A professional diagram showing maker freedom moving through intake, build, review, release, monitor, and retire controls.</desc>
+  <defs>
+    <linearGradient id="page" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f8fbff"/>
+      <stop offset="1" stop-color="#eef5f8"/>
+    </linearGradient>
+    <filter id="softShadow" x="-15%" y="-20%" width="130%" height="145%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#263442" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="720" rx="28" fill="url(#page)"/>
+  <text x="72" y="78" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#172033">Microsoft Agentic ALM Control Model</text>
+  <text x="72" y="116" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#596676">Freedom for makers, governed promotion for production agents.</text>
+
+  <g filter="url(#softShadow)">
+    <rect x="72" y="160" width="1056" height="420" rx="22" fill="#ffffff" stroke="#d8e2ec"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="120" y="220" width="172" height="92" rx="16" fill="#fff7ed" stroke="#efb26b" stroke-width="2"/>
+    <text x="206" y="257" text-anchor="middle" font-size="22" font-weight="700" fill="#2d2418">Intake</text>
+    <text x="206" y="285" text-anchor="middle" font-size="15" fill="#624c38">owner, purpose,</text>
+    <text x="206" y="306" text-anchor="middle" font-size="15" fill="#624c38">data sensitivity</text>
+
+    <rect x="330" y="220" width="172" height="92" rx="16" fill="#eef6ff" stroke="#7db5e9" stroke-width="2"/>
+    <text x="416" y="257" text-anchor="middle" font-size="22" font-weight="700" fill="#15324f">Build</text>
+    <text x="416" y="285" text-anchor="middle" font-size="15" fill="#465f78">topics, actions,</text>
+    <text x="416" y="306" text-anchor="middle" font-size="15" fill="#465f78">knowledge sources</text>
+
+    <rect x="540" y="220" width="172" height="92" rx="16" fill="#f3f0ff" stroke="#aa98e2" stroke-width="2"/>
+    <text x="626" y="257" text-anchor="middle" font-size="22" font-weight="700" fill="#31274d">Review</text>
+    <text x="626" y="285" text-anchor="middle" font-size="15" fill="#5d5373">identity, DLP,</text>
+    <text x="626" y="306" text-anchor="middle" font-size="15" fill="#5d5373">connector risk</text>
+
+    <rect x="750" y="220" width="172" height="92" rx="16" fill="#effaf2" stroke="#86ca94" stroke-width="2"/>
+    <text x="836" y="257" text-anchor="middle" font-size="22" font-weight="700" fill="#163e24">Release</text>
+    <text x="836" y="285" text-anchor="middle" font-size="15" fill="#496552">solutions, gates,</text>
+    <text x="836" y="306" text-anchor="middle" font-size="15" fill="#496552">approvals</text>
+
+    <rect x="960" y="220" width="120" height="92" rx="16" fill="#f7fafc" stroke="#a8b3bf" stroke-width="2"/>
+    <text x="1020" y="257" text-anchor="middle" font-size="22" font-weight="700" fill="#263442">Run</text>
+    <text x="1020" y="285" text-anchor="middle" font-size="15" fill="#5f6f7e">monitor</text>
+    <text x="1020" y="306" text-anchor="middle" font-size="15" fill="#5f6f7e">and retire</text>
+  </g>
+
+  <g fill="none" stroke="#73879a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M292 266h38"/>
+    <path d="M502 266h38"/>
+    <path d="M712 266h38"/>
+    <path d="M922 266h38"/>
+  </g>
+  <g fill="#73879a">
+    <path d="M323 256l16 10-16 10z"/>
+    <path d="M533 256l16 10-16 10z"/>
+    <path d="M743 256l16 10-16 10z"/>
+    <path d="M953 256l16 10-16 10z"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="120" y="388" font-size="18" font-weight="700" fill="#172033">Controls that make the lifecycle real</text>
+    <rect x="120" y="416" width="280" height="86" rx="14" fill="#f8fafc" stroke="#d8e2ec"/>
+    <text x="144" y="451" font-size="19" font-weight="700" fill="#172033">Identity model</text>
+    <text x="144" y="476" font-size="15" fill="#596676">Delegated user, app identity,</text>
+    <text x="144" y="496" font-size="15" fill="#596676">or connector-owned access.</text>
+
+    <rect x="460" y="416" width="280" height="86" rx="14" fill="#f8fafc" stroke="#d8e2ec"/>
+    <text x="484" y="451" font-size="19" font-weight="700" fill="#172033">Environment strategy</text>
+    <text x="484" y="476" font-size="15" fill="#596676">Experiment, dev, test, and</text>
+    <text x="484" y="496" font-size="15" fill="#596676">production separated by risk.</text>
+
+    <rect x="800" y="416" width="280" height="86" rx="14" fill="#f8fafc" stroke="#d8e2ec"/>
+    <text x="824" y="451" font-size="19" font-weight="700" fill="#172033">Runtime oversight</text>
+    <text x="824" y="476" font-size="15" fill="#596676">Telemetry, owner review,</text>
+    <text x="824" y="496" font-size="15" fill="#596676">incident response, retirement.</text>
+  </g>
+
+  <rect x="72" y="626" width="1056" height="52" rx="26" fill="#172033"/>
+  <text x="600" y="660" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#ffffff">The question is not who can build an agent. It is when that agent is allowed to act for the business.</text>
+</svg>
