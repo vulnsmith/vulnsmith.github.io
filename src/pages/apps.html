@@ -9,22 +9,35 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem("vulnsmith-theme");
+        if (!theme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
+        document.documentElement.dataset.theme = theme ? theme : "light";
+      } catch (error) {
+        document.documentElement.dataset.theme = "light";
+      }
+    }());
+  </script>
   <link href="/css/pages.css?v=20260707-2" rel="stylesheet">
+  <script defer src="/js/theme-toggle.js"></script>
 </head>
 
 <body>
   <header>
     <nav style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem;">
       <div style="font-weight: bold; font-size: 1.15rem; letter-spacing: 0.02em;">
-        <span style="font-weight: bold; font-size: 1.15rem;">Jack Smith</span> <span style="font-weight: 400; color: #888;">| vulnsmith</span>
+        <span style="font-weight: bold; font-size: 1.15rem;">Jack Smith</span> <span class="brand-muted" style="font-weight: 400;">| vulnsmith</span>
       </div>
-      <div style="display: flex; gap: 2rem;">
+      <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="projects.html">Projects</a>
         <a href="blog.html">Blog</a>
         <a href="apps.html" class="active">Applications</a>
         <a href="tools.html">Tools</a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" aria-pressed="false"><span data-theme-icon>🌙</span></button>
       </div>
     </nav>
   </header>

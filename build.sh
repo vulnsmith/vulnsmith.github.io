@@ -26,6 +26,11 @@ fi
 mkdir -p public/css
 cp css/*.css public/css/
 
+if [ -d js ]; then
+  mkdir -p public/js
+  cp js/*.js public/js/
+fi
+
 if [ -d assets ]; then
   cp -R assets public/
 fi
