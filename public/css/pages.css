@@ -1085,6 +1085,68 @@ footer {
     margin-bottom: 1.1rem;
 }
 
+.article-callout {
+    border-left: 4px solid var(--accent-color);
+    border-radius: 8px;
+    margin: 1.75rem 0;
+    padding: 1.1rem 1.2rem;
+    background: var(--accent-soft);
+}
+
+.article-callout strong {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.article-callout p {
+    margin-bottom: 0;
+    font-size: 1rem;
+}
+
+.article-pullquote {
+    margin: 2rem 0;
+    padding: 1.25rem 0 1.25rem 1.5rem;
+    border-left: 3px solid var(--accent-color);
+    color: var(--text-color);
+    font-size: 1.38rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.article-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.article-card-grid.two-col {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.article-mini-card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    background: var(--surface-color);
+}
+
+.article-mini-card strong {
+    display: block;
+    margin-bottom: 0.45rem;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.article-mini-card p {
+    margin-bottom: 0;
+    color: var(--muted-color);
+    font-size: 0.93rem;
+    line-height: 1.55;
+}
+
 .article-figure {
     margin: 2rem 0 2.5rem;
 }
@@ -1161,6 +1223,11 @@ footer {
 
     .home-hero h1 {
         font-size: 3.4rem;
+    }
+
+    .article-card-grid,
+    .article-card-grid.two-col {
+        grid-template-columns: 1fr;
     }
 
     .focus-grid {
