@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Howdy Hack Chess, a hackathon-winning voice-controlled chess game by Jack Smith." />
+  <title>vulnsmith | Howdy Hack Chess</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="../css/pages.css?v=20260707-2" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <nav style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem;">
+      <div style="font-weight: bold; font-size: 1.15rem; letter-spacing: 0.02em;">
+        <span style="font-weight: bold; font-size: 1.15rem;">Jack Smith</span> <span style="font-weight: 400; color: #888;">| vulnsmith</span>
+      </div>
+      <div style="display: flex; gap: 2rem;">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../projects.html" class="active">Projects</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../apps.html">Applications</a>
+        <a href="../tools.html">Tools</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="project-detail">
+
+    <a class="back-link" href="../projects.html">← All Projects</a>
+
+    <div class="project-detail-hero">
+      <div class="project-card-mark chess-mark">HC</div>
+      <div>
+        <h1>Howdy Hack Chess</h1>
+        <div class="project-badge-row">
+          <span class="project-badge badge-python">Python</span>
+          <span class="project-badge badge-game">Pygame</span>
+          <span class="project-badge badge-ai">Watson STT</span>
+          <span class="project-badge badge-open">Hackathon Winner</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="project-detail-desc">A college hackathon-winning voice-controlled chess game built for Howdy Hack. The project combined a custom Pygame chess interface with audio capture and speech-to-text parsing so players could move pieces by speaking commands.</p>
+
+    <div class="project-section">
+      <h2>Features</h2>
+      <ul class="feature-list">
+        <li>Playable chess interface built with Python and Pygame</li>
+        <li>Custom board, piece, and turn-indicator assets</li>
+        <li>Speech input pipeline that captured voice commands and converted them into move instructions</li>
+        <li>Command parsing that translated spoken files/ranks into board coordinates</li>
+        <li>Docker packaging for a repeatable demo environment</li>
+      </ul>
+    </div>
+
+    <div class="project-section">
+      <h2>Architecture</h2>
+      <ul class="feature-list">
+        <li><span><strong>Game loop</strong> — Pygame-rendered board, pieces, turns, and move validation</span></li>
+        <li><span><strong>Audio capture</strong> — recorded command audio for speech recognition processing</span></li>
+        <li><span><strong>Speech parsing</strong> — IBM Watson speech-to-text results converted into chess move coordinates</span></li>
+        <li><span><strong>Assets</strong> — local PNG sprites for white and black pieces, board state, and turn display</span></li>
+      </ul>
+    </div>
+
+    <div class="project-section">
+      <h2>Tech Stack</h2>
+      <div class="tech-grid">
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">Pygame</span>
+        <span class="tech-pill">IBM Watson Speech to Text</span>
+        <span class="tech-pill">Audio Capture</span>
+        <span class="tech-pill">Docker</span>
+        <span class="tech-pill">Chess Logic</span>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Jack Smith. All rights reserved.</p>
+    <p>Connect with me via <a class="footer-link" href="mailto:contact@vulnsmith.com">email</a> or follow me on <a class="footer-link" href="https://www.linkedin.com/in/vulnsmith/">LinkedIn</a>.</p>
+  </footer>
+</body>
+
+</html>

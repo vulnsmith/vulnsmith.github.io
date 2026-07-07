@@ -2,15 +2,32 @@
 
 set -e
 
-# Clean output directory (except index.html)
-find public -type f ! -name 'index.html' -delete
+# Clean generated output before copying fresh files.
+find public -type f -delete
+find public -mindepth 1 -type d -empty -delete
 
-# Copy all .html files from src/pages to public/
+# Copy root-level pages that are maintained outside src/pages.
+cp index.html public/
+
+# Copy all source page files to public/.
 cp src/pages/*.html public/
 
-# Optionally copy CSS, JS, etc.
-# cp -r src/css public/
-# cp -r src/js public/
-# cp -r src/assets public/
+# Copy project detail pages.
+if [ -d projects ]; then
+  cp -R projects public/
+fi
+
+# Copy nested page directories such as /blog/<entry>/.
+if [ -d src/pages/blog ]; then
+  cp -R src/pages/blog public/
+fi
+
+# Copy shared static assets used by generated pages.
+mkdir -p public/css
+cp css/*.css public/css/
+
+if [ -d assets ]; then
+  cp -R assets public/
+fi
 
 echo "Build complete. All pages copied to public/"

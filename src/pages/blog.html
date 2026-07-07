@@ -4,32 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Blog section of Jack Smith's professional site" />
+  <meta name="description" content="Cybersecurity blog posts by Jack Smith covering cloud security, infrastructure, automation, and enterprise security engineering." />
   <title>vulnsmith | Blog</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap" rel="stylesheet">
-  <link href="css/pages.css?v=20260707-2" rel="stylesheet">
-  <style>
-    /* Make the whole page a flex container with column direction */
-    html, body {
-      height: 100%;      /* full height */
-      margin: 0;         /* remove default margin */
-    }
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-    main {
-      flex: 1;           /* take all remaining space */
-    }
-    footer {
-      background: #222;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-    }
-  </style>
+  <link href="/css/pages.css?v=20260707-2" rel="stylesheet">
 </head>
 
 <body>
@@ -49,16 +29,29 @@
     </nav>
   </header>
 
-  <main>
-    <section id="blog">
-      <h2>Blog Posts</h2>
-      <p>Welcome to my blog! Here, I will share insights, tutorials, and thoughts on cybersecurity, cloud security, and automation. Stay tuned for upcoming posts!</p>
+  <main class="blog-page">
+    <section class="blog-hero" id="blog">
+      <p class="home-eyebrow">Blog</p>
+      <h1>Engineering notes from the security edge.</h1>
+      <p class="blog-intro">Long-form technical writing on cybersecurity architecture, cloud security, infrastructure, automation, and the messy parts of operating controls in the real world.</p>
+    </section>
+
+    <section class="blog-list" aria-label="Blog posts">
+      <article class="blog-card">
+        <div class="blog-card-meta">
+          <span>Enterprise Security</span>
+          <span>July 7, 2026</span>
+        </div>
+        <h2><a href="blog/enterprise-nac-forescout-fortinac/">Deploying Enterprise NAC: Real-World Challenges and a Technical Look at Forescout vs. FortiNAC</a></h2>
+        <p>Enterprise NAC is less a product installation than a multi-domain engineering program. This post walks through visibility, enforcement, 802.1X, exceptions, segmentation, operations, and where Forescout and FortiNAC each fit.</p>
+        <a class="blog-read-link" href="blog/enterprise-nac-forescout-fortinac/">Read post</a>
+      </article>
     </section>
   </main>
 
   <footer>
     <p>&copy; 2026 Jack Smith. All rights reserved.</p>
-    <p>Connect with me via <a href="mailto:contact@vulnsmith.com" style="color: var(--accent-color); text-decoration: none;">email</a> or follow me on <a href="https://www.linkedin.com/in/vulnsmith/" style="color: var(--accent-color); text-decoration: none;">LinkedIn</a>.</p>
+    <p>Connect with me via <a class="footer-link" href="mailto:contact@vulnsmith.com">email</a> or follow me on <a class="footer-link" href="https://www.linkedin.com/in/vulnsmith/">LinkedIn</a>.</p>
   </footer>
 </body>
 
