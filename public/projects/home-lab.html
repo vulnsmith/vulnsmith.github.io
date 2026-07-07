@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Home Lab Infrastructure - Proxmox, k3s, OPNsense, VLAN segmentation, self-hosted services, and resilient backups by Jack Smith." />
+  <title>vulnsmith | Home Lab Infrastructure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="../css/pages.css?v=20260707-2" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <nav style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem;">
+      <div style="font-weight: bold; font-size: 1.15rem; letter-spacing: 0.02em;">
+        <span style="font-weight: bold; font-size: 1.15rem;">Jack Smith</span> <span style="font-weight: 400; color: #888;">| vulnsmith</span>
+      </div>
+      <div style="display: flex; gap: 2rem;">
+        <a href="../index.html">Home</a>
+        <a href="../about.html">About</a>
+        <a href="../projects.html" class="active">Projects</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../apps.html">Applications</a>
+        <a href="../tools.html">Tools</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="project-detail">
+
+    <a class="back-link" href="../projects.html">← All Projects</a>
+
+    <div class="project-detail-hero">
+      <div class="project-card-mark lab-mark">HL</div>
+      <div>
+        <h1>Home Lab Infrastructure</h1>
+        <div class="project-badge-row">
+          <span class="project-badge badge-virtualization">Proxmox HA</span>
+          <span class="project-badge badge-k8s">k3s</span>
+          <span class="project-badge badge-network">OPNsense</span>
+          <span class="project-badge badge-security">Zenarmor</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="project-detail-desc">A production-style home lab built around high availability, segmentation, secure service exposure, and recoverability. The environment runs Proxmox HA hypervisors, k3s-hosted containers, dedicated VMs, Traefik-routed internal services, hardened VLAN firewalling, DNS filtering, Home Assistant, Tailscale exit nodes, and automated backup replication to NAS and cloud storage.</p>
+
+    <div class="project-section">
+      <h2>Architecture</h2>
+      <ul class="feature-list">
+        <li>Proxmox HA hypervisors hosting both virtual machines and container workloads</li>
+        <li>k3s cluster for containerized internal services and lab applications</li>
+        <li>Tailscale VM exit nodes for private remote access and controlled egress paths</li>
+        <li>Traefik reverse proxy in front of self-hosted services including Excalidraw, draw.io, Obsidian, Paint, regex101, OneTimeSecret, and secrss</li>
+      </ul>
+    </div>
+
+    <div class="project-section">
+      <h2>Network Security</h2>
+      <ul class="feature-list">
+        <li>OPNsense edge firewall with hardened rules per VLAN</li>
+        <li>Zenarmor NGFW tooling for traffic visibility and policy enforcement</li>
+        <li>AdGuard Home for DNS filtering and local resolver control</li>
+        <li>Full VLAN segmentation across trust, semi-trust, IoT, guest, DMZ, and sandbox networks</li>
+      </ul>
+    </div>
+
+    <div class="project-section">
+      <h2>Operations</h2>
+      <ul class="feature-list">
+        <li>Hosted Home Assistant with integrated automation and supporting tools</li>
+        <li>Service exposure designed around reverse proxy routing instead of broad network access</li>
+        <li>Automated backups to NAS with cloud replication for offsite resilience</li>
+        <li>Lab structure designed to test infrastructure, security controls, and self-hosted workflows without weakening the trusted network</li>
+      </ul>
+    </div>
+
+    <div class="project-section">
+      <h2>Tech Stack</h2>
+      <div class="tech-grid">
+        <span class="tech-pill">Proxmox</span>
+        <span class="tech-pill">k3s</span>
+        <span class="tech-pill">OPNsense</span>
+        <span class="tech-pill">Zenarmor</span>
+        <span class="tech-pill">Traefik</span>
+        <span class="tech-pill">Tailscale</span>
+        <span class="tech-pill">AdGuard Home</span>
+        <span class="tech-pill">Home Assistant</span>
+        <span class="tech-pill">VLAN Segmentation</span>
+        <span class="tech-pill">NAS Backups</span>
+        <span class="tech-pill">Cloud Replication</span>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Jack Smith. All rights reserved.</p>
+    <p>Connect with me via <a class="footer-link" href="mailto:contact@vulnsmith.com">email</a> or follow me on <a class="footer-link" href="https://www.linkedin.com/in/vulnsmith/">LinkedIn</a>.</p>
+  </footer>
+</body>
+
+</html>
