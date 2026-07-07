@@ -35,4 +35,10 @@ if [ -d assets ]; then
   cp -R assets public/
 fi
 
+if [ -f CNAME ]; then
+  cp CNAME public/
+fi
+
+touch public/.nojekyll
+
 echo "Build complete. All pages copied to public/"
