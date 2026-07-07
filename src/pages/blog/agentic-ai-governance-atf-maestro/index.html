@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Part one of an enterprise AI governance series introducing the Agentic Trust Framework and MAESTRO for guardrails, controls, and agentic AI risk management." />
+  <title>AI Governance for Agentic Systems: ATF and MAESTRO | vulnsmith</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem("vulnsmith-theme");
+        if (!theme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
+        document.documentElement.dataset.theme = theme ? theme : "light";
+      } catch (error) {
+        document.documentElement.dataset.theme = "light";
+      }
+    }());
+  </script>
+  <link href="/css/pages.css?v=20260707-5" rel="stylesheet">
+  <script defer src="/js/theme-toggle.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem;">
+      <div style="font-weight: bold; font-size: 1.15rem; letter-spacing: 0.02em;">
+        <span style="font-weight: bold; font-size: 1.15rem;">Jack Smith</span> <span class="brand-muted" style="font-weight: 400;">| vulnsmith</span>
+      </div>
+      <div class="nav-links">
+        <a href="/index.html">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/blog.html" class="active">Blog</a>
+        <a href="/apps.html">Applications</a>
+        <a href="/tools.html">Tools</a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" aria-pressed="false"><span data-theme-icon>🌙</span></button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="article-page">
+    <article class="article">
+      <header class="article-header">
+        <a class="article-back-link" href="/blog.html">Back to blog</a>
+        <p class="home-eyebrow">AI Governance</p>
+        <h1>AI Governance for Agentic Systems, Part 1: ATF and MAESTRO</h1>
+        <p class="article-dek">Enterprise AI governance gets harder when an AI system can reason, select tools, touch data, call APIs, and take action. Two useful models help bring order to that problem: MAESTRO for threat modeling and the Agentic Trust Framework for operational control.</p>
+        <div class="article-meta">
+          <span>Jack Smith</span>
+          <span>July 7, 2026</span>
+          <span>Enterprise AI governance series</span>
+        </div>
+      </header>
+
+      <figure class="article-figure">
+        <img src="/assets/images/agentic-governance-atf-maestro.svg" alt="Diagram showing MAESTRO feeding risk decisions and ATF controls for agentic AI governance">
+        <figcaption>MAESTRO helps identify agentic AI risk across the architecture. ATF turns that risk understanding into identity, behavior, data, segmentation, and response controls.</figcaption>
+      </figure>
+
+      <section>
+        <p>Most organizations are still learning how to govern generative AI. That work usually starts with acceptable use policies, data handling rules, model approval, prompt guidance, legal review, and a basic inventory of AI tools. Those are necessary controls, but they are not enough once AI systems become agentic.</p>
+        <p>An agent is not just a chatbot with better branding. In enterprise terms, an agent is a software actor that can interpret a goal, choose a path, use tools, retrieve or transform data, invoke APIs, and sometimes execute changes in business systems. That makes agentic AI closer to a privileged automation worker than a passive application feature.</p>
+        <p>This is why AI governance needs to move from policy documents into enforceable control planes. The questions become concrete: Which agent is acting? Who owns it? What data can it see? Which tools can it call? What business process is it allowed to influence? How do we know whether its behavior changed? Who can stop it quickly?</p>
+        <p>Two Cloud Security Alliance frameworks are useful starting points for answering those questions. MAESTRO gives teams a structured way to model threats across agentic AI architecture. The Agentic Trust Framework gives teams a zero trust governance model for deciding how much autonomy an agent should earn and what controls must surround it.</p>
+      </section>
+
+      <section>
+        <h2>Why Agentic AI Breaks Traditional Governance</h2>
+        <p>Traditional application governance works well when a system has deterministic code paths, stable permissions, predictable inputs, and human users performing clearly attributable actions. Agentic AI changes each of those assumptions.</p>
+        <p>Agent behavior can be probabilistic. Tool choice may vary based on context. A prompt injection buried in a document can become an instruction source. A retrieval plugin can pull sensitive data into the reasoning path. A benign workflow can become risky when an agent chains tools together faster than a human reviewer can follow. Even when the model is behaving as designed, the system may produce an action that is hard to explain, approve, or reverse.</p>
+        <p>The governance problem is not simply "is this model safe?" It is "is this agent, in this business process, with this identity, this data access, these tools, this autonomy level, and this monitoring posture acceptable for enterprise use?"</p>
+        <p>That framing matters because it moves governance out of vague AI concern and into familiar security architecture: identity, least privilege, segmentation, logging, change control, incident response, risk acceptance, audit evidence, and lifecycle management.</p>
+      </section>
+
+      <section>
+        <h2>MAESTRO: Threat Modeling the Agent Stack</h2>
+        <p>MAESTRO is an agentic AI threat modeling framework published by the Cloud Security Alliance. Its value is that it gives security teams a structured reference architecture for thinking about where agentic AI can fail or be attacked.</p>
+        <p>Instead of treating an AI agent as one opaque application, MAESTRO decomposes the environment into layers. The CSA article describes a seven-layer view that spans foundation models, data operations, agent frameworks, deployment infrastructure, evaluation and observability, security and compliance, and the agent ecosystem where agents interact with users, applications, marketplaces, and other agents.</p>
+        <p>That layered approach is important because agentic AI risk rarely lives in only one place. A model may be robust, while the retrieval layer leaks sensitive data. A tool may be properly secured, while the agent framework allows unsafe tool chaining. Observability may exist at the application layer, while the organization has no useful audit trail for agent intent, intermediate reasoning, or tool invocation. MAESTRO gives teams a map for finding those gaps.</p>
+        <p>MAESTRO also broadens threat modeling beyond classic application issues. It pushes teams to consider AI-specific and autonomy-specific threats such as agent impersonation, compromised agents, goal manipulation, tool misuse, malicious agent discovery, agent registry compromise, insecure integrations, data poisoning, and failures in monitoring or evaluation.</p>
+        <p>For enterprise governance, MAESTRO is useful because it turns "we need to secure AI" into a practical review exercise. Architecture, security, risk, privacy, and platform teams can walk the layers and ask what could go wrong before the agent is deployed into a business process.</p>
+      </section>
+
+      <section>
+        <h2>ATF: Zero Trust Governance for AI Agents</h2>
+        <p>The Agentic Trust Framework, or ATF, is an open governance specification presented by CSA for autonomous AI agents. Where MAESTRO is useful for asking what can go wrong, ATF is useful for asking how the organization maintains control while still allowing agents to become useful.</p>
+        <p>ATF applies zero trust principles to agentic AI. No agent is trusted by default because it has a good purpose statement, a known vendor, or a successful demo. Trust has to be earned through identity, observable behavior, constrained access, governed data handling, and a response model that assumes failure is possible.</p>
+        <p>The CSA article presents five core ATF elements as simple governance questions: Who are you? What are you doing? What are you eating and serving? Where can you go? What happens if you go rogue?</p>
+        <p>Those questions map neatly to enterprise controls. Identity requires unique agent identifiers, credential binding, ownership, purpose declarations, and capability manifests. Behavior requires structured logs, action attribution, baselines, anomaly detection, and explainability. Data governance requires input validation, injection prevention, sensitive data protection, output validation, and lineage. Segmentation requires allowlists, action boundaries, rate limits, transaction limits, and blast radius containment. Incident response requires circuit breakers, kill switches, session revocation, rollback where possible, and graceful degradation.</p>
+        <p>ATF also introduces a maturity model for autonomy. Agents do not jump straight from prototype to unsupervised execution. They move through levels such as observe-only, recommend-with-approval, bounded autonomous execution, and domain-level autonomy. Promotion requires evidence: performance, security validation, business value, clean incident history, and governance sign-off.</p>
+      </section>
+
+      <section>
+        <h2>How They Work Together</h2>
+        <p>MAESTRO and ATF are strongest when used together. MAESTRO helps the organization identify the threats and failure modes across the agent architecture. ATF helps the organization decide what controls, gates, and runtime constraints are required before granting more autonomy.</p>
+        <div class="article-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Governance Question</th>
+                <th>MAESTRO Contribution</th>
+                <th>ATF Contribution</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>What are we building?</td>
+                <td>Maps the agent system across model, data, framework, infrastructure, observability, security, and ecosystem layers.</td>
+                <td>Requires purpose, ownership, identity, and capability documentation for the agent.</td>
+              </tr>
+              <tr>
+                <td>What could go wrong?</td>
+                <td>Identifies layer-specific threats such as tool misuse, goal manipulation, data poisoning, insecure integrations, and compromised agents.</td>
+                <td>Links those risks to controls such as segmentation, validation, monitoring, and incident response.</td>
+              </tr>
+              <tr>
+                <td>How much autonomy is acceptable?</td>
+                <td>Provides risk context for the business process, tool chain, and surrounding architecture.</td>
+                <td>Uses maturity levels and promotion gates to increase autonomy only after evidence is available.</td>
+              </tr>
+              <tr>
+                <td>How do we prove control?</td>
+                <td>Shows that the organization performed structured threat analysis across the agent stack.</td>
+                <td>Produces operational evidence through logs, approvals, baselines, policy enforcement, and incident records.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>Why This Satisfies Enterprise AI Governance</h2>
+        <p>Enterprise AI governance is not a single policy. It is a set of requirements that usually includes inventory, ownership, risk classification, data protection, access control, model and system evaluation, monitoring, incident response, auditability, vendor oversight, lifecycle management, and executive risk acceptance.</p>
+        <p>MAESTRO supports the front end of that governance process. It gives teams a repeatable way to identify risk across the agent architecture, including risks that traditional application threat models often miss. That matters for governance because risk acceptance should be based on system context, not generic AI anxiety.</p>
+        <p>ATF supports the operating model. It translates governance into controls that can be assigned, tested, monitored, and evidenced. An enterprise can require every production agent to have a unique identity, a business owner, an approved capability manifest, scoped credentials, data handling rules, structured logs, anomaly detection, tool restrictions, rate limits, human approval gates, and an emergency stop path.</p>
+        <p>Together, these frameworks help answer the questions auditors, boards, regulators, and security leaders will ask. Do you know where agents exist? Do you know what they can do? Did you review their risks? Are sensitive data paths controlled? Is access least privilege? Can you reconstruct what happened? Can you contain a failure? Is autonomy earned or simply granted?</p>
+        <p>That is the core governance win. MAESTRO creates a defensible risk model. ATF creates a defensible control model. One explains why controls are needed; the other explains how those controls are applied over time.</p>
+      </section>
+
+      <section>
+        <h2>A Practical Enterprise Control Pattern</h2>
+        <p>A useful first implementation does not need to be exotic. Start with an agent inventory that records owner, purpose, business process, data touched, tools available, model/provider, deployment environment, and autonomy level. Require a MAESTRO-style threat model before production use. Assign an ATF maturity level and prohibit agents from exceeding that level without documented approval.</p>
+        <p>For low-risk agents, the control set may be simple: identity, source approval, logging, data classification checks, read-only access, and human review before action. For higher-risk agents, add tool allowlists, policy-as-code, ABAC, output validation, PII detection, transaction limits, streaming telemetry, anomaly alerts, kill switches, rollback plans, adversarial testing, and risk committee approval.</p>
+        <p>This also gives enterprises a clean way to talk about AI guardrails. Guardrails are not just prompt instructions. Real guardrails include identity boundaries, data boundaries, tool boundaries, autonomy boundaries, behavioral monitoring, and response boundaries. The closer an agent gets to autonomous action, the more those guardrails need to be enforced outside the model itself.</p>
+      </section>
+
+      <section>
+        <h2>Part 2 Preview</h2>
+        <p>This post focused on the governance and threat modeling foundation: MAESTRO for understanding risk and ATF for controlling trust. In part two, we will move from governance architecture into agent lifecycle management, including Microsoft's agent lifecycle framework and the practical operational questions that come with building, deploying, monitoring, and retiring enterprise agents.</p>
+      </section>
+
+      <section class="article-sources">
+        <h2>Further Reading</h2>
+        <p><a href="https://cloudsecurityalliance.org/blog/2026/02/02/the-agentic-trust-framework-zero-trust-governance-for-ai-agents">Cloud Security Alliance: The Agentic Trust Framework: Zero Trust Governance for AI Agents</a></p>
+        <p><a href="https://cloudsecurityalliance.org/blog/2025/02/06/agentic-ai-threat-modeling-framework-maestro">Cloud Security Alliance: Agentic AI Threat Modeling Framework: MAESTRO</a></p>
+        <p><a href="https://csrc.nist.gov/pubs/sp/800/207/final">NIST SP 800-207: Zero Trust Architecture</a></p>
+      </section>
+
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Jack Smith. All rights reserved.</p>
+    <p>Connect with me via <a class="footer-link" href="mailto:contact@vulnsmith.com">email</a> or follow me on <a class="footer-link" href="https://www.linkedin.com/in/vulnsmith/">LinkedIn</a>.</p>
+  </footer>
+</body>
+
+</html>

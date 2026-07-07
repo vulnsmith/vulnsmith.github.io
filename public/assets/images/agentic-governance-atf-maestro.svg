@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 640" role="img" aria-labelledby="title desc">
+  <title id="title">Agentic AI governance model using MAESTRO and ATF</title>
+  <desc id="desc">A layered diagram showing MAESTRO threat modeling feeding risk decisions and ATF controls enforcing enterprise agent governance.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f9fbff"/>
+      <stop offset="1" stop-color="#edf5f4"/>
+    </linearGradient>
+    <linearGradient id="control" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#0b6b78"/>
+      <stop offset="1" stop-color="#4a7c2f"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-12%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#1d1d1f" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <rect width="1120" height="640" rx="24" fill="url(#bg)"/>
+  <g opacity="0.9">
+    <circle cx="1004" cy="86" r="54" fill="#d9ebe8"/>
+    <circle cx="91" cy="552" r="44" fill="#dce8f8"/>
+  </g>
+  <text x="72" y="80" fill="#1d1d1f" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">Agentic AI Governance Control Plane</text>
+  <text x="72" y="116" fill="#5f6168" font-family="Arial, Helvetica, sans-serif" font-size="18">MAESTRO identifies agent risk. ATF turns trust into enforceable controls.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="72" y="160" width="294" height="338" rx="14" fill="#ffffff" stroke="#dfe5ec"/>
+    <text x="100" y="204" fill="#0b6b78" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">MAESTRO</text>
+    <text x="100" y="232" fill="#5f6168" font-family="Arial, Helvetica, sans-serif" font-size="15">Threat model the agent stack</text>
+    <g font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#32343a">
+      <text x="100" y="282">Layer 7: Agent ecosystem</text>
+      <text x="100" y="320">Layer 6: Security & compliance</text>
+      <text x="100" y="358">Layer 5: Evaluation & observability</text>
+      <text x="100" y="396">Layer 4: Deployment infrastructure</text>
+      <text x="100" y="434">Layer 3: Agent frameworks</text>
+      <text x="100" y="472">Layer 2: Data operations</text>
+      <text x="100" y="510">Layer 1: Foundation models</text>
+    </g>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="414" y="160" width="292" height="338" rx="14" fill="#ffffff" stroke="#dfe5ec"/>
+    <text x="442" y="204" fill="#3b6d1f" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">Risk Decision</text>
+    <text x="442" y="232" fill="#5f6168" font-family="Arial, Helvetica, sans-serif" font-size="15">Convert analysis into governance</text>
+    <g fill="#f4f7fb" stroke="#dfe5ec">
+      <rect x="442" y="268" width="236" height="44" rx="8"/>
+      <rect x="442" y="328" width="236" height="44" rx="8"/>
+      <rect x="442" y="388" width="236" height="44" rx="8"/>
+      <rect x="442" y="448" width="236" height="44" rx="8"/>
+    </g>
+    <g font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#32343a" font-weight="700">
+      <text x="464" y="296">Use case and owner</text>
+      <text x="464" y="356">Autonomy level</text>
+      <text x="464" y="416">Allowed tools and data</text>
+      <text x="464" y="476">Evidence and approval gates</text>
+    </g>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="754" y="160" width="294" height="338" rx="14" fill="#ffffff" stroke="#dfe5ec"/>
+    <text x="782" y="204" fill="#0b6b78" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">ATF Controls</text>
+    <text x="782" y="232" fill="#5f6168" font-family="Arial, Helvetica, sans-serif" font-size="15">Continuously verify agent trust</text>
+    <g font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#32343a">
+      <text x="782" y="286">Identity: who is acting?</text>
+      <text x="782" y="326">Behavior: what is happening?</text>
+      <text x="782" y="366">Data governance: what flows through?</text>
+      <text x="782" y="406">Segmentation: where can it go?</text>
+      <text x="782" y="446">Incident response: how is it stopped?</text>
+    </g>
+  </g>
+
+  <g fill="none" stroke="url(#control)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M372 329h35"/>
+    <path d="M712 329h35"/>
+  </g>
+  <g fill="#0b6b78">
+    <path d="M400 317l18 12-18 12z"/>
+    <path d="M740 317l18 12-18 12z"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="215" y="548" width="690" height="48" rx="24" fill="url(#control)"/>
+    <text x="560" y="579" text-anchor="middle" fill="#ffffff" font-size="17" font-weight="700">Enterprise outcome: accountable autonomy, audit evidence, least privilege, monitored behavior, and rapid containment</text>
+  </g>
+</svg>

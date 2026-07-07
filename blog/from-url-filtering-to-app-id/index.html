@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A practical Palo Alto Networks firewall policy guide explaining why App-ID, SSL decryption, security profiles, and application groups should replace URL-only access control." />
+  <title>Stop Filtering URLs. Start Controlling Applications. | vulnsmith</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        var theme = localStorage.getItem("vulnsmith-theme");
+        if (!theme && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
+        document.documentElement.dataset.theme = theme ? theme : "light";
+      } catch (error) {
+        document.documentElement.dataset.theme = "light";
+      }
+    }());
+  </script>
+  <link href="/css/pages.css?v=20260707-5" rel="stylesheet">
+  <script defer src="/js/theme-toggle.js"></script>
+</head>
+
+<body>
+  <header>
+    <nav style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem;">
+      <div style="font-weight: bold; font-size: 1.15rem; letter-spacing: 0.02em;">
+        <span style="font-weight: bold; font-size: 1.15rem;">Jack Smith</span> <span class="brand-muted" style="font-weight: 400;">| vulnsmith</span>
+      </div>
+      <div class="nav-links">
+        <a href="/index.html">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/blog.html" class="active">Blog</a>
+        <a href="/apps.html">Applications</a>
+        <a href="/tools.html">Tools</a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" aria-pressed="false"><span data-theme-icon>🌙</span></button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="article-page">
+    <article class="article">
+      <header class="article-header">
+        <a class="article-back-link" href="/blog.html">Back to blog</a>
+        <p class="home-eyebrow">Firewall Policy</p>
+        <h1>Stop Filtering URLs. Start Controlling Applications.</h1>
+        <p class="article-dek">URL filtering still matters, but it should not be the primary way an enterprise decides what traffic is allowed. Palo Alto Networks App-ID gives firewall policy a more durable unit of control: the business application itself.</p>
+        <div class="article-meta">
+          <span>Jack Smith</span>
+          <span>November 12, 2025</span>
+          <span>Technical guide</span>
+        </div>
+      </header>
+
+      <figure class="article-figure">
+        <img src="/assets/images/app-id-policy-model.svg" alt="Application-aware firewall policy model showing context, App-ID, inspection, and enforcement decisions." />
+        <figcaption>Application-aware policy ties user, device, application, URL category, decryption, and security profiles into one enforceable decision.</figcaption>
+      </figure>
+
+      <section>
+        <p>For years, enterprise firewalls were governed through a familiar collection of URL categories, destination objects, ports, protocols, and occasionally long allowlists of SaaS domains. That model worked well enough when applications were simpler, traffic was less encrypted, and enterprise software lived in more predictable places.</p>
+        <p>Modern application delivery changed the shape of the problem. A single SaaS platform may depend on hundreds of domains, APIs, CDNs, identity endpoints, telemetry services, and third-party integrations. Developers use cloud-native services that shift addresses constantly. Users access sanctioned applications from browsers, native clients, mobile apps, and embedded integrations. Meanwhile, most meaningful traffic is encrypted.</p>
+        <p>In that environment, URL filtering alone becomes a brittle way to express security intent. It can still reduce risk, but it should no longer be the center of the access-control model. The better question is not simply "what URL is this packet trying to reach?" It is "what application is this session actually using, who is using it, from what device, and under what inspection controls?"</p>
+      </section>
+
+      <section>
+        <h2>Why URL Filtering Hits a Ceiling</h2>
+        <p>URL allowlists tend to age badly. Vendors change hostnames, move content behind new CDNs, introduce new API endpoints, or blend application traffic with services that are also used by other vendors. An allowlist that was clean at deployment can become incomplete or overly broad after a few product releases.</p>
+        <p>URL-only policy also struggles to distinguish business intent. A destination may host multiple application functions with very different risk profiles. A broad category may include both useful and unwanted behavior. A domain object may prove that traffic is going to a vendor, but not necessarily what application behavior is occurring inside the session.</p>
+        <p>This creates operational drag. Firewall teams chase broken application dependencies, security teams inherit rules that are difficult to audit, and incident responders see logs that describe destinations but do not always explain the application context behind the connection.</p>
+      </section>
+
+      <section>
+        <h2>The Palo Alto Policy Shift</h2>
+        <p>Palo Alto Networks Next-Generation Firewalls are designed around application identity. App-ID identifies applications regardless of IP address, port, protocol, or many common evasive behaviors. That lets administrators write rules around the business applications the organization actually wants to permit.</p>
+        <p>This is a meaningful architectural shift. Instead of writing a rule that says "allow outbound TCP 443 to these destinations," a policy can say "allow this user group to use this sanctioned application from managed devices, inspect it with these profiles, and deny the rest." The rule becomes closer to the real intent.</p>
+        <p>Application-based policy also survives infrastructure churn more gracefully. If the vendor changes IP space or introduces a new backend service, the firewall policy is less likely to require a manual destination-object scramble, assuming the application can still be identified and the supporting controls are correctly configured.</p>
+      </section>
+
+      <section>
+        <h2>SSL Decryption Is the Visibility Multiplier</h2>
+        <p>Application identification is strongest when the firewall can see enough of the session to classify it accurately and inspect it for threats. SSL Forward Proxy decryption restores visibility into encrypted user egress traffic where it is appropriate, lawful, and aligned with organizational policy.</p>
+        <p>That visibility enables more than App-ID. It also improves Threat Prevention, Antivirus, Anti-Spyware, Vulnerability Protection, DNS Security, WildFire, File Blocking, and Data Filtering outcomes. Without decryption, many controls still provide value, but the firewall is making decisions with less context.</p>
+        <p>Decryption should be implemented carefully. Health care, banking, personal email, legal, and other sensitive categories may require privacy or regulatory exceptions. The certificate authority design, endpoint trust deployment, bypass policy, troubleshooting workflow, and user communications all matter. Poorly planned decryption can create reliability and trust problems; well-planned decryption gives security teams the visibility they need without turning every exception into an emergency.</p>
+      </section>
+
+      <section>
+        <h2>Build Policy Around Application Groups</h2>
+        <p>Application control becomes easier to operate when related applications are grouped into reusable policy objects. Instead of creating one rule per application, build application groups around business functions such as office productivity, collaboration, developer tools, remote administration, finance platforms, cloud infrastructure, or approved file sharing.</p>
+        <p>Good grouping makes policy readable. A rule called "Developers to approved source-control and CI/CD platforms" communicates intent better than a pile of individual destination objects. It also makes audit conversations easier because security, infrastructure, and business owners can discuss access in the language of work rather than raw network coordinates.</p>
+        <p>Application groups should still be narrow enough to enforce least privilege. "Allow all SaaS" is not a strategy. The goal is to grant the applications required for a role or system, then deny or challenge traffic that falls outside that expected pattern.</p>
+      </section>
+
+      <section>
+        <h2>Separate User, Server, and Administrative Traffic</h2>
+        <p>User egress, server egress, server-to-server communication, and privileged administrative access should not share one broad rulebase. They have different owners, risk profiles, logging needs, and failure modes.</p>
+        <p>User traffic often benefits from identity-aware policy, SSL Forward Proxy decryption, URL category controls, SaaS application groups, and data protection. Server egress should be much more constrained, with explicit application dependencies and tight destination scopes where possible. Server-to-server policy should be reviewed as part of segmentation, not treated as generic outbound access. Administrative traffic deserves its own path, stronger authentication, and clear separation from routine workstation browsing.</p>
+        <p>This separation also improves investigations. When logs show that a managed workstation used an approved collaboration app, that is a different signal than a production server initiating unexpected browser-like traffic to the internet.</p>
+      </section>
+
+      <section>
+        <h2>Attach Security Profile Groups to Permit Rules</h2>
+        <p>Application control is the start of the decision, not the end. Every permit rule should generally include a Security Profile Group appropriate to the traffic. A strong baseline commonly includes Antivirus, Anti-Spyware, Vulnerability Protection, URL Filtering, DNS Security, WildFire, and File Blocking, with Data Filtering added where the use case requires it.</p>
+        <p>This layered approach matters because allowed applications can still carry malicious files, exploit attempts, command-and-control behavior, phishing links, or sensitive data movement. The point of allowing a business application is not to trust every session blindly. It is to permit the intended application and inspect the allowed traffic deeply enough to catch abuse.</p>
+      </section>
+
+      <section>
+        <h2>URL Filtering Still Matters</h2>
+        <p>The argument is not that URL filtering is obsolete. URL filtering remains valuable when it is used as a complementary control. Categories such as malware, phishing, command-and-control, newly registered domains, dynamic DNS, parked domains, and other high-risk classifications can reduce exposure even when application policy is well designed.</p>
+        <p>The difference is role. URL filtering should help govern behavior within and around allowed applications. It should not be the only structure holding the access model together. App-ID answers the application question; URL filtering adds destination and content risk context.</p>
+      </section>
+
+      <section>
+        <h2>A Practical Migration Sequence</h2>
+        <div class="article-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>Engineering Focus</th>
+                <th>Outcome</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Observe</td>
+                <td>Enable application visibility, improve logging, and baseline current traffic before changing enforcement.</td>
+                <td>The team understands which applications are actually in use.</td>
+              </tr>
+              <tr>
+                <td>Decrypt selectively</td>
+                <td>Deploy SSL Forward Proxy where appropriate, with explicit privacy, regulatory, and technical bypasses.</td>
+                <td>Inspection depth improves without surprising users or breaking sensitive workflows.</td>
+              </tr>
+              <tr>
+                <td>Group applications</td>
+                <td>Create reusable application groups aligned to roles, departments, server functions, and business services.</td>
+                <td>Rules express business intent instead of raw destinations.</td>
+              </tr>
+              <tr>
+                <td>Attach profiles</td>
+                <td>Apply Security Profile Groups to permit rules and tune exceptions based on evidence.</td>
+                <td>Allowed sessions are still inspected for threats and data risk.</td>
+              </tr>
+              <tr>
+                <td>Refine continuously</td>
+                <td>Review logs, remove stale dependencies, tighten broad rules, and validate ownership.</td>
+                <td>The rulebase becomes easier to audit and harder to abuse.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>Operational Benefits</h2>
+        <p>Application-aware logging is one of the quiet wins. Investigations move faster when events show the application, user, device, URL category, threat verdicts, and rule intent together. Reporting becomes more meaningful because leadership can see which business applications are being used instead of reviewing generic port and destination statistics.</p>
+        <p>Policy maintenance also improves. When a business owner asks for access, the conversation can start with the application and business purpose. When a rule is reviewed, the team can ask whether that application is still required for that user group or asset class. When an incident occurs, analysts can distinguish sanctioned use from suspicious application behavior more quickly.</p>
+      </section>
+
+      <section>
+        <h2>Conclusion</h2>
+        <p>Modern firewalls should understand business applications rather than simply forwarding packets to approved destinations. URL filtering remains important, but it is stronger as part of an application-aware policy stack than as the primary access-control mechanism.</p>
+        <p>Combining App-ID, SSL decryption where appropriate, reusable application groups, Security Profile Groups, URL category controls, and thoughtful traffic separation creates a firewall architecture that is easier to operate, more resilient to SaaS infrastructure changes, and better aligned with Zero Trust principles.</p>
+        <p>The destination still matters. The category still matters. But the application, user, device, and inspection outcome matter more.</p>
+      </section>
+
+      <section class="article-sources">
+        <h2>Further Reading</h2>
+        <p><a href="https://docs.paloaltonetworks.com/pan-os" rel="noopener">Palo Alto Networks PAN-OS documentation</a></p>
+        <p><a href="https://www.paloaltonetworks.com/technologies/app-id" rel="noopener">Palo Alto Networks App-ID overview</a></p>
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Jack Smith. All rights reserved.</p>
+    <p>Connect with me via <a class="footer-link" href="mailto:contact@vulnsmith.com">email</a> or follow me on <a class="footer-link" href="https://www.linkedin.com/in/vulnsmith/">LinkedIn</a>.</p>
+  </footer>
+</body>
+
+</html>
