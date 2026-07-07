@@ -65,12 +65,12 @@
     <div class="project-section">
       <h2>Architecture</h2>
       <ul class="feature-list">
-        <li><strong>CameraService</strong> — @MainActor AVCaptureSession with delegate dispatch back to main thread</li>
-        <li><strong>FilterService</strong> — Core Image pipeline; Polaroid frame baked via Core Graphics composite</li>
-        <li><strong>UploadQueue (actor)</strong> — persists JPEGs to Library/Caches with JSON manifest before upload attempt</li>
-        <li><strong>UploadService</strong> — fetches fresh presign URL per upload (15-min TTL), 1 retry on failure, silent fail</li>
-        <li><strong>NetworkMonitor</strong> — NWPathMonitor bridge; calls UploadQueue.flush() on reconnect and app foreground</li>
-        <li><strong>Lambda (Node.js)</strong> — createHandler factory pattern for injectability; sanitises guest name before building S3 key</li>
+        <li><span><strong>CameraService</strong> — @MainActor AVCaptureSession with delegate dispatch back to main thread</span></li>
+        <li><span><strong>FilterService</strong> — Core Image pipeline; Polaroid frame baked via Core Graphics composite</span></li>
+        <li><span><strong>UploadQueue (actor)</strong> — persists JPEGs to Library/Caches with JSON manifest before upload attempt</span></li>
+        <li><span><strong>UploadService</strong> — fetches fresh presign URL per upload (15-min TTL), 1 retry on failure, silent fail</span></li>
+        <li><span><strong>NetworkMonitor</strong> — NWPathMonitor bridge; calls UploadQueue.flush() on reconnect and app foreground</span></li>
+        <li><span><strong>Lambda (Node.js)</strong> — createHandler factory pattern for injectability; sanitises guest name before building S3 key</span></li>
       </ul>
     </div>
 

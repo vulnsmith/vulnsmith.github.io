@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Professional personal site of Jack Smith" />
+  <meta name="description" content="Jack Smith, vulnsmith - cloud security engineer, builder, and security researcher." />
   <title>Jack Smith | vulnsmith</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,23 +29,73 @@
     </nav>
   </header>
 
-  <main>
-    <section id="main">
-      <h2>Engineering... in a nut shell</h2>
-      <p>
-        In today's hyperconnected digital ecosystem, computing is no longer just a tool—it's a paradigm shift, a synergistic convergence of cloud-native microservices, quantum-resilient cryptography, and AI-driven automation. As we leverage scalable, containerized infrastructures and orchestrate seamless CI/CD pipelines, the boundaries between physical and virtual dissolve, ushering in a new era of digital transformation. 
-      </p>
-      <p>
-        Modern cybersecurity strategies employ zero-trust architectures, blockchain-enabled ledgers, and predictive threat intelligence, ensuring that mission-critical assets remain resilient against next-gen vulnerabilities. With the integration of full-stack observability and real-time telemetry, organizations can proactively remediate flux capacitor anomalies before they impact business continuity.
-      </p>
-      <p>
-        The future is built on a foundation of agile methodologies, blameless retrospectives, and a relentless pursuit of operational excellence. Whether you're deploying serverless functions onto other peoples servers at scale, optimizing for multi-cloud interoperability, or simply refactoring legacy spaghetti code into modular, event-driven architectures, remember: in the world of computing, innovation is the only constant. Welcome to the edge—where every packet counts, and every keystroke shapes tomorrow.
-      </p>
+  <main class="home-page">
+    <section class="home-hero" aria-labelledby="home-title">
+      <div class="home-hero-copy">
+        <p class="home-eyebrow">Cloud security engineer / builder / researcher</p>
+        <h1 id="home-title">I secure cloud systems and build the tools I wish existed.</h1>
+        <p class="home-lede">
+          I work across cloud security, application security, DevSecOps, identity, and infrastructure. My focus is simple: understand how systems fail, automate the work that matters, and leave teams with practical controls they can actually operate.
+        </p>
+        <div class="home-actions" aria-label="Primary links">
+          <a class="home-button primary" href="projects.html">View projects</a>
+          <a class="home-button secondary" href="about.html">About Jack</a>
+        </div>
+      </div>
+
+      <aside class="home-signal-panel" aria-label="Security work snapshot">
+        <div class="signal-header">
+          <span>vulnsmith@cloud</span>
+          <span>secure-build</span>
+        </div>
+        <div class="signal-lines">
+          <span><strong>map</strong> identity, data paths, and blast radius</span>
+          <span><strong>harden</strong> infrastructure before it becomes incident work</span>
+          <span><strong>automate</strong> evidence, guardrails, and repeatable fixes</span>
+          <span><strong>ship</strong> tools that make secure behavior easier</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="home-section" aria-labelledby="focus-title">
+      <div class="section-heading">
+        <p class="home-eyebrow">Focus</p>
+        <h2 id="focus-title">Security work with engineering teeth.</h2>
+      </div>
+      <div class="focus-grid">
+        <article class="focus-item">
+          <h3>Cloud Security</h3>
+          <p>AWS architecture, access boundaries, detection paths, and practical hardening for production systems.</p>
+        </article>
+        <article class="focus-item">
+          <h3>DevSecOps</h3>
+          <p>Security checks and remediation workflows that fit how engineers already build, test, and deploy.</p>
+        </article>
+        <article class="focus-item">
+          <h3>Application Security</h3>
+          <p>Threat modeling, secure design review, and vulnerability analysis grounded in how the app actually behaves.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="home-section featured-work" aria-labelledby="featured-title">
+      <div class="section-heading">
+        <p class="home-eyebrow">Featured build</p>
+        <h2 id="featured-title">Wedding Camera</h2>
+      </div>
+      <a class="featured-project" href="projects/wedding-camera.html">
+        <img src="assets/images/wedding-camera-icon.png" alt="Wedding Camera app icon" />
+        <div>
+          <h3>Disposable camera flow for real events</h3>
+          <p>SwiftUI, AVFoundation, S3, and Lambda working together so guests can shoot and sync private event photos without exposing cloud credentials on device.</p>
+        </div>
+        <span>View project</span>
+      </a>
     </section>
   </main>
   <footer>
     <p>&copy; 2026 Jack Smith. All rights reserved.</p>
-    <p>Connect with me via <a href="mailto:contact@vulnsmith.com" style="color: var(--accent-color); text-decoration: none;">email</a> or follow me on <a href="https://www.linkedin.com/in/vulnsmith/" style="color: var(--accent-color); text-decoration: none;">LinkedIn</a>.</p>
+    <p>Connect with me via <a class="footer-link" href="mailto:contact@vulnsmith.com">email</a> or follow me on <a class="footer-link" href="https://www.linkedin.com/in/vulnsmith/">LinkedIn</a>.</p>
   </footer>
 </body>
 

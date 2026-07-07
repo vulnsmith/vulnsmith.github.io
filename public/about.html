@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="About Jack Smith - Cybersecurity Engineer" />
+  <meta name="description" content="About Jack Smith - cloud security engineer, builder, and security researcher." />
   <title>About | Jack Smith</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,16 +29,84 @@
     </nav>
   </header>
 
-  <main>
-    <section>
-      <h2>About Me</h2>
-      <p>I'm a cybersecurity engineer with a passion for cloud security, automation, and building secure systems that scale. I've led initiatives at Triumph Financial and Citibank to protect data and strengthen infrastructure in fast-moving environments.</p>
+  <main class="about-page">
+    <section class="about-hero" aria-labelledby="about-title">
+      <p class="home-eyebrow">About</p>
+      <h1 id="about-title">I build practical security programs for real infrastructure.</h1>
+      <p class="about-summary">
+        I'm Jack Smith, a cybersecurity engineer focused on cloud security, network security, endpoint protection, automation, and secure infrastructure design. I like security work that has to survive contact with production: clear controls, measurable outcomes, and tools that engineers can actually use.
+      </p>
+      <div class="about-actions">
+        <a class="home-button primary" href="projects.html">View projects</a>
+        <a class="home-button secondary" href="mailto:contact@vulnsmith.com">Contact me</a>
+      </div>
+    </section>
+
+    <section class="about-section" aria-labelledby="experience-title">
+      <div class="section-heading">
+        <p class="home-eyebrow">Experience</p>
+        <h2 id="experience-title">Security engineering across cloud, endpoint, and network layers.</h2>
+      </div>
+      <div class="about-stat-grid">
+        <div class="about-stat">
+          <strong>13,000+</strong>
+          <span>enterprise devices covered through NAC platform work</span>
+        </div>
+        <div class="about-stat">
+          <strong>8,000+</strong>
+          <span>systems migrated to CrowdStrike Falcon endpoint protection</span>
+        </div>
+        <div class="about-stat">
+          <strong>40%</strong>
+          <span>mean response time reduction through security automation</span>
+        </div>
+      </div>
+
+      <div class="experience-list">
+        <article class="experience-item">
+          <h3>Cloud and infrastructure security</h3>
+          <p>Implemented Wiz CSPM for AWS visibility, aligned cloud security work with CIS benchmarks and compliance needs, and helped harden enterprise infrastructure during Fortinet modernization efforts.</p>
+        </article>
+        <article class="experience-item">
+          <h3>Enterprise protection programs</h3>
+          <p>Led major security platform deployments and migrations, including NAC coverage for more than 13,000 devices and endpoint protection rollout across more than 8,000 systems.</p>
+        </article>
+        <article class="experience-item">
+          <h3>Security automation</h3>
+          <p>Built automation workflows for incident triage, enrichment, and response so teams could move faster without losing discipline or context.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="about-section" aria-labelledby="approach-title">
+      <div class="section-heading">
+        <p class="home-eyebrow">Approach</p>
+        <h2 id="approach-title">Understand the system. Reduce the blast radius. Automate the boring parts.</h2>
+      </div>
+      <div class="competency-grid">
+        <article class="competency-item">
+          <h3>Map the risk</h3>
+          <p>I start with how identity, data, network paths, and failure modes actually behave before prescribing controls.</p>
+        </article>
+        <article class="competency-item">
+          <h3>Ship usable controls</h3>
+          <p>Security tooling should meet engineers where they work, with feedback loops that make secure decisions easier.</p>
+        </article>
+        <article class="competency-item">
+          <h3>Build across layers</h3>
+          <p>My project work spans embedded C, Flutter, Swift, AWS, Flask, PostgreSQL, Python, and security automation.</p>
+        </article>
+        <article class="competency-item">
+          <h3>Leave evidence</h3>
+          <p>Good security work is observable, auditable, and repeatable enough for the next person to trust it.</p>
+        </article>
+      </div>
     </section>
   </main>
 
   <footer>
     <p>&copy; 2026 Jack Smith. All rights reserved.</p>
-    <p>Connect with me via <a href="mailto:contact@vulnsmith.com" style="color: var(--accent-color); text-decoration: none;">email</a> or follow me on <a href="https://www.linkedin.com/in/vulnsmith/" style="color: var(--accent-color); text-decoration: none;">LinkedIn</a>.</p>
+    <p>Connect with me via <a class="footer-link" href="mailto:contact@vulnsmith.com">email</a> or follow me on <a class="footer-link" href="https://www.linkedin.com/in/vulnsmith/">LinkedIn</a>.</p>
   </footer>
 </body>
 
