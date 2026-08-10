@@ -1196,6 +1196,21 @@ footer {
     overflow-x: auto;
 }
 
+.article pre {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.1rem 1.25rem;
+    background: var(--surface-color);
+    color: var(--text-color);
+    font: 0.88rem/1.6 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.article pre code {
+    font: inherit;
+}
+
 .article table {
     border-collapse: collapse;
     min-width: 720px;
