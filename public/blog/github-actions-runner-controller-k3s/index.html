@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Deploying GitHub Actions Runner Controller on a k3s home lab with Flux, ephemeral Docker builders, and a private Gitea registry.">
+  <title>Ephemeral GitHub Actions Runners on k3s | vulnsmith</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <script>(function(){try{var t=localStorage.getItem('vulnsmith-theme');if(!t&&matchMedia('(prefers-color-scheme: dark)').matches)t='dark';document.documentElement.dataset.theme=t||'light'}catch(e){document.documentElement.dataset.theme='light'}}());</script>
+  <link href="/css/pages.css?v=20260814-1" rel="stylesheet">
+  <script defer src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "dark", securityLevel: "strict" });
+  </script>
+</head>
+<body>
+<header><nav style="display:flex;align-items:center;justify-content:space-between;padding:1.5rem 2rem"><div style="font-weight:bold;font-size:1.15rem"><span>Jack Smith</span> <span class="brand-muted" style="font-weight:400">| vulnsmith</span></div><div class="nav-links"><a href="/index.html">Home</a><a href="/about.html">About</a><a href="/projects.html">Projects</a><a href="/blog.html" class="active">Blog</a><a href="/apps.html">Applications</a><a href="/tools.html">Tools</a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" aria-pressed="false"><span data-theme-icon>🌙</span></button></div></nav></header>
+<main class="article-page"><article class="article">
+<header class="article-header"><a class="article-back-link" href="/blog.html">Back to blog</a><p class="home-eyebrow">The k3s Home Lab · Part 4</p><h1>The k3s Home Lab, Part 4: Ephemeral GitHub Actions Runners with ARC</h1><p class="article-dek">Building a journaling application inside the cluster required more than a runner pod. It connected GitHub's job queue, Kubernetes autoscaling, a private Gitea registry, and Flux image automation into one controlled delivery loop.</p><div class="article-meta"><span>Jack Smith</span><span>August 14, 2026</span><span>CI/CD implementation notes</span></div></header>
+
+<section><p>Flux had already made the cluster reproducible. The next gap was the path into it. Application manifests reconciled from Git, but container images were still built outside the platform and pushed by hand. For a small journaling application, I wanted a commit to produce an immutable image, publish it to the private Gitea registry, and let Flux promote that image without giving a CI job direct control of the cluster.</p><p>GitHub Actions Runner Controller, usually shortened to ARC, supplied the missing execution layer. ARC watches GitHub's Actions service, translates queued work into Kubernetes demand, and creates self-hosted runner pods only when jobs exist. The runner completes one job and disappears. At idle, the listener remains connected but the expensive Docker builder scales to zero.</p><p>The result is two related control loops with a deliberate boundary between them. CI builds and publishes an artifact. GitOps selects and deploys it. GitHub never receives cluster-admin credentials, and the workflow never patches the live Deployment.</p></section>
+
+<section><h2>From Commit to Ephemeral Runner</h2><p>The CI path begins before ARC is involved. A developer opens a feature branch, the change passes review, and merging to the default branch queues the GitHub Actions workflow. Only then does ARC translate the queued job into temporary Kubernetes capacity.</p><figure class="article-figure article-mermaid"><pre class="mermaid">
+---
+config:
+  layout: dagre
+  theme: dark
+  flowchart:
+    nodeSpacing: 45
+    rankSpacing: 65
+    curve: basis
+---
+flowchart LR
+    subgraph GITHUB["Development and GitHub"]
+        direction TB
+        DEV["Developer&lt;br/&gt;writes code"]
+        BRANCH["GitHub&lt;br/&gt;feature branch"]
+        PR["Pull request"]
+        REVIEW["Review and checks"]
+        MERGE["Merge to main"]
+        WORKFLOW["Actions workflow&lt;br/&gt;is queued"]
+
+        DEV --&gt; BRANCH
+        BRANCH --&gt; PR
+        PR --&gt; REVIEW
+        REVIEW --&gt; MERGE
+        MERGE --&gt; WORKFLOW
+    end
+
+    subgraph ARC["ARC on K3s"]
+        direction TB
+        LISTENER["Listener receives&lt;br/&gt;the job"]
+        SCALE["Scale set requests&lt;br/&gt;one runner"]
+        POD["Ephemeral runner pod&lt;br/&gt;starts"]
+        BUILD["Build and test&lt;br/&gt;the application"]
+        PUSH["Push image to&lt;br/&gt;Gitea registry"]
+        DELETE["Job completes&lt;br/&gt;and pod is deleted"]
+        ZERO["Runner capacity&lt;br/&gt;returns to zero"]
+
+        LISTENER --&gt; SCALE
+        SCALE --&gt; POD
+        POD --&gt; BUILD
+        BUILD --&gt; PUSH
+        PUSH --&gt; DELETE
+        DELETE --&gt; ZERO
+    end
+
+    WORKFLOW --&gt; LISTENER
+
+    classDef github fill:#242f49,stroke:#93c5fd,color:#ffffff,stroke-width:2px
+    classDef arc fill:#172f50,stroke:#60a5fa,color:#ffffff,stroke-width:2px
+    classDef runner fill:#123e42,stroke:#2dd4bf,color:#ffffff,stroke-width:2px
+    classDef registry fill:#402d17,stroke:#f59e0b,color:#ffffff,stroke-width:2px
+    classDef lifecycle fill:#18283d,stroke:#64748b,color:#e2e8f0,stroke-width:2px
+
+    class DEV,BRANCH,PR,REVIEW,MERGE,WORKFLOW github
+    class LISTENER,SCALE arc
+    class POD,BUILD runner
+    class PUSH registry
+    class DELETE,ZERO lifecycle
+</pre><figcaption>A reviewed merge queues work in GitHub. ARC creates one disposable runner pod, publishes the image, and returns runner capacity to zero.</figcaption></figure><p>ARC itself has three visible layers. The controller is the Kubernetes operator that reconciles ARC custom resources. A listener maintains a long-poll connection to GitHub for one runner scale set. Ephemeral runner pods are the actual job capacity. Keeping those roles distinct is important during both sizing and troubleshooting.</p><div class="article-table-wrap"><table><thead><tr><th>Component</th><th>Lifetime</th><th>Responsibility</th></tr></thead><tbody><tr><td>ARC controller</td><td>Persistent</td><td>Reconciles scale sets, listeners, ephemeral runners, and runner pods.</td></tr><tr><td>Scale-set listener</td><td>Persistent</td><td>Waits for GitHub job assignments and calculates required capacity.</td></tr><tr><td>Ephemeral runner pod</td><td>One job</td><td>Checks out source, builds the image, pushes it, then terminates.</td></tr><tr><td>Docker-in-Docker sidecar</td><td>Same as runner pod</td><td>Provides the Docker daemon used by the build job.</td></tr><tr><td>Flux image controllers</td><td>Persistent</td><td>Scan Gitea, select a tag, update Git, and expose reconciliation status.</td></tr></tbody></table></div></section>
+
+<section><h2>Prerequisites and Trust Boundaries</h2><p>The cluster already had k3s, Flux, ingress, persistent storage, and access to the private Gitea registry. ARC added several new dependencies: outbound HTTPS and DNS access to GitHub and GHCR, enough node capacity for image builds, a GitHub identity allowed to manage repository runners, and registry credentials that could push the journaling application's images.</p><p>I separated credentials by purpose. ARC's GitHub credential registers and manages runners. The workflow's Gitea credential pushes images. Cluster workloads use a different, read-only pull credential. Flux uses its own registry credential for scanning tags and a separate Git identity if image automation writes commits. Reusing one powerful secret would have been convenient, but it would also have made every component part of the same compromise path.</p><p>Docker-in-Docker was the largest security decision. It made existing Docker-based Actions straightforward, but the Docker daemon runs privileged. An ephemeral pod limits how long state survives; it does not make arbitrary workflow code harmless. Runner nodes should be treated as a build trust zone, isolated from sensitive workloads and internal services wherever the cluster topology allows it.</p></section>
+
+<section><h2>Repository Layout</h2><p>ARC is installed from two Helm charts: one for the shared controller and one for each runner scale set. Both charts are published as OCI artifacts in GitHub Container Registry rather than through a traditional Helm repository. I kept their Flux sources, releases, authentication material, and dependency order together under infrastructure.</p><pre><code>clusters/
+  home-lab/
+    infrastructure/
+      actions-runner-controller/
+        namespace.yaml
+        controller-oci.yaml
+        controller-release.yaml
+        runner-scale-set-oci.yaml
+        journal-runner-release.yaml
+        github-auth.sops.yaml
+        kustomization.yaml
+    apps/
+      journal/
+        deployment.yaml
+        image-repository.yaml
+        image-policy.yaml
+        image-update-automation.yaml
+        registry-pull-secret.sops.yaml
+        kustomization.yaml</code></pre><p>The names describe responsibilities rather than implementation accidents. The journaling application owns its deployment and image policy. ARC remains shared infrastructure even if the first scale set serves only one repository.</p></section>
+
+<section><h2>Namespace and Secret</h2><p>GitHub recommends keeping controller pods and runner pods in separate namespaces. A compact homelab can start with one namespace, but a stronger layout places the controller in <code>arc-systems</code> and listeners, runner secrets, and runner pods in <code>github-actions</code>. Namespace separation supports narrower RBAC and policy, though it is not isolation by itself.</p><pre><code>apiVersion: v1
+kind: Namespace
+metadata:
+  name: github-actions
+  labels:
+    app.kubernetes.io/part-of: actions-runner-controller</code></pre><p>The ARC authentication secret belongs in the same namespace as the runner scale-set release. The checked-in version is encrypted with SOPS; a normal Kubernetes Secret containing base64 data is only encoded and should not be committed as if it were protected.</p><pre><code>apiVersion: v1
+kind: Secret
+metadata:
+  name: github-arc-auth
+  namespace: github-actions
+type: Opaque
+stringData:
+  github_token: ENC[AES256_GCM,data:...,type:str]
+sops:
+  # SOPS metadata omitted</code></pre></section>
+
+<section><h2>OCI Helm Sources</h2><p>ARC's current scale-set mode is delivered through OCI Helm charts. That detail matters with Flux: the sources are <code>OCIRepository</code> resources, not entries in a conventional <code>HelmRepository</code>. I pinned both charts to an explicitly tested release rather than allowing an unreviewed upgrade to change the controller and runner behavior.</p><pre><code>apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: arc-controller-chart
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
+  ref:
+    tag: "&lt;tested-arc-version&gt;"
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: OCIRepository
+metadata:
+  name: arc-scale-set-chart
+  namespace: flux-system
+spec:
+  interval: 1h
+  url: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set
+  ref:
+    tag: "&lt;tested-arc-version&gt;"</code></pre><p>API versions evolve, so the committed manifests must match the Flux controllers actually installed in the cluster. The durable design is the OCI URL, explicit version, reconciliation interval, and visible dependency—not a particular beta or stable API label copied from an article.</p></section>
+
+<section><h2>Installing the Controller</h2><p>The controller is shared infrastructure. One installation can reconcile multiple runner scale sets, so its release name should not be tied to the journaling application.</p><pre><code>apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: arc-controller
+  namespace: github-actions
+spec:
+  interval: 30m
+  chartRef:
+    kind: OCIRepository
+    name: arc-controller-chart
+    namespace: flux-system
+  values:
+    replicaCount: 1
+    flags:
+      logLevel: info
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi</code></pre><p>One replica is reasonable for a small cluster where CI availability is not critical. A larger environment would add controller availability, topology spread, disruption policy, metrics, centralized logs, and a tested upgrade path. Availability should be designed around real failure domains; two controller pods on one physical host are not independent.</p></section>
+
+<section><h2>Defining the Runner Scale Set</h2><p>The scale set is repository-scoped and named <code>journal-runner</code>. That name becomes the workflow's <code>runs-on</code> target. A minimum of zero removes idle job pods, while a maximum of two permits limited concurrency without allowing builds to consume the entire cluster.</p><pre><code>apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: journal-runner
+  namespace: github-actions
+spec:
+  interval: 15m
+  dependsOn:
+    - name: arc-controller
+  chartRef:
+    kind: OCIRepository
+    name: arc-scale-set-chart
+    namespace: flux-system
+  values:
+    githubConfigUrl: https://github.com/example/journal
+    githubConfigSecret: github-arc-auth
+    runnerScaleSetName: journal-runner
+    minRunners: 0
+    maxRunners: 2
+    containerMode:
+      type: dind
+    template:
+      spec:
+        containers:
+          - name: runner
+            image: ghcr.io/actions/actions-runner:latest
+            resources:
+              requests:
+                cpu: "1"
+                memory: 2Gi
+              limits:
+                cpu: "4"
+                memory: 8Gi
+        nodeSelector:
+          kubernetes.io/os: linux</code></pre><p>The runner container must remain named <code>runner</code>; ARC uses that name when it configures the pod. In a long-lived repository I would pin the runner image by version or digest, then automate reviewed updates. The <code>latest</code> value above keeps the example readable but should not be mistaken for a supply-chain policy.</p></section>
+
+<section><h2>The Authentication Failure That Looked Like Kubernetes</h2><p>The controller deployed successfully, but the listener never appeared. The controller logs showed a 403 while requesting a registration token from GitHub. Because the Kubernetes resources and secret existed, it was tempting to keep debugging Helm and RBAC. The failure was actually at the GitHub API boundary.</p><p>A repository-scoped fine-grained personal access token needs <strong>Repository permissions → Administration: Read and write</strong>. Granting Actions read and write sounds correct, but runner registration is an administration operation. Without that permission, ARC can start in Kubernetes but cannot create or authenticate the repository's runner scale set.</p><div class="article-table-wrap"><table><thead><tr><th>Runner scope</th><th>Relevant credential permissions</th><th>Design note</th></tr></thead><tbody><tr><td>Repository</td><td>Fine-grained PAT: Administration, read and write</td><td>Limit the token to the intended repository.</td></tr><tr><td>Organization</td><td>Administration read; self-hosted runners read and write</td><td>Use runner groups to restrict repository access.</td></tr><tr><td>GitHub App</td><td>Repository Administration read/write when repository-scoped; organization self-hosted runners read/write when organization-scoped</td><td>Preferred future state for repository or organization runners.</td></tr></tbody></table></div><p>After changing a fine-grained token, I also verify its resource owner, selected repositories, expiration, organization approval, and SSO state. A permission shown in the token editor is not proof that the organization has accepted or authorized the token.</p></section>
+
+<section><h2>Why One Runner Appeared as Two Containers</h2><p>When the first job arrived, Kubernetes reported the runner pod as <code>2/2 Running</code>. That was not two runner pods. Docker-in-Docker mode places the Actions runner and a Docker daemon in the same pod. Kubernetes readiness counts containers inside a pod, so both containers being ready produces <code>2/2</code>.</p><pre><code>kubectl get pod -n github-actions &lt;runner-pod&gt; \
+  -o jsonpath='{.spec.containers[*].name}{"\n"}'
+
+# runner dind</code></pre><p>The controller and listener are also pods, but neither executes the application build. ARC's custom resources provide the useful capacity view: current runners, pending runners, running runners, finished runners, and deleting runners. With one active job, the expected state is one runner even though the namespace contains multiple pods.</p></section>
+
+<section><h2>The Ephemeral Runner Lifecycle</h2><ol><li>The listener maintains an HTTPS long-poll connection to GitHub's Actions service.</li><li>A workflow targets <code>runs-on: journal-runner</code>, and GitHub assigns the job to that scale set.</li><li>The listener updates desired capacity. ARC creates an <code>EphemeralRunnerSet</code> and an <code>EphemeralRunner</code>.</li><li>Kubernetes schedules the runner pod. In DinD mode, both the runner and Docker daemon containers initialize.</li><li>The runner registers with a short-lived token, accepts one job, checks out the repository, and builds the image.</li><li>The workflow pushes immutable and convenience tags to the Gitea registry.</li><li>The runner exits. ARC removes the GitHub runner record and deletes the Kubernetes resources and pod.</li><li>Flux detects the new registry tag, commits the selected version to Git, and reconciles the journaling application.</li></ol><p>Scale-to-zero changes the definition of healthy. At idle, no runner pod is expected. The persistent listener is the signal that the scale set can receive work; runner pods are short-lived evidence of demand.</p></section>
+
+<section><h2>Building and Publishing the Image</h2><p>The workflow produces an immutable tag derived from the commit and may also publish <code>latest</code> for convenience. Flux promotes the immutable version. That preserves provenance and makes rollback a Git change rather than a guess about what a mutable tag contained.</p><pre><code>name: Build journal image
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  image:
+    runs-on: journal-runner
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v5
+
+      - name: Log in to the private registry
+        uses: docker/login-action@v4
+        with:
+          registry: git.example.internal
+          username: ${{ secrets.GITEA_REGISTRY_USERNAME }}
+          password: ${{ secrets.GITEA_REGISTRY_TOKEN }}
+
+      - name: Generate image metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: git.example.internal/apps/journal
+          tags: |
+            type=sha,prefix=sha-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          provenance: mode=max</code></pre><p>I upgraded the JavaScript-based actions as their runtimes changed rather than ignoring runner deprecation warnings. Major action tags are readable, but high-assurance workflows should pin third-party actions to reviewed commit SHAs and use dependency automation to propose updates.</p></section>
+
+<section><h2>Private Registry Details</h2><p>The runner needs a write-capable Gitea credential only for the login and push steps. The journaling application's namespace receives a separate image-pull secret with read-only registry access. Flux's <code>ImageRepository</code> also needs permission to enumerate tags.</p><p>If Gitea uses a private certificate authority, every K3s node that may pull the image must trust it. K3s configures containerd registry mirrors and TLS settings through <code>/etc/rancher/k3s/registries.yaml</code>. That file must be consistent across eligible nodes, and changing it requires a planned K3s restart. A publicly trusted internal certificate is simpler and safer than disabling TLS verification.</p><p>The job can successfully push an image while Kubernetes still fails to pull it. Registry publication, Flux scanning, and node image pulls are three separate authentication and trust paths; each needs independent verification.</p></section>
+
+<section><h2>Flux Image Automation</h2><p>Flux image automation closes the loop without giving the GitHub workflow Kubernetes credentials. The delivery path has three ownership boundaries: registry discovery and policy, Git desired state, and cluster reconciliation. An <code>ImageRepository</code> scans Gitea, an <code>ImagePolicy</code> selects an allowed tag, and an <code>ImageUpdateAutomation</code> writes that selection back to the cluster repository before the normal Flux reconciliation deploys it.</p><figure class="article-figure article-mermaid"><pre class="mermaid">
+---
+config:
+  layout: dagre
+  theme: dark
+  flowchart:
+    nodeSpacing: 45
+    rankSpacing: 65
+    curve: basis
+---
+flowchart LR
+    subgraph DISCOVERY["Registry and image selection"]
+        direction TB
+        REGISTRY["Gitea registry&lt;br/&gt;contains new image"]
+        SCAN["ImageRepository&lt;br/&gt;scans tags"]
+        CHECK["ImagePolicy&lt;br/&gt;checks versions"]
+        SELECT["Newest eligible&lt;br/&gt;image selected"]
+
+        REGISTRY --&gt; SCAN
+        SCAN --&gt; CHECK
+        CHECK --&gt; SELECT
+    end
+
+    subgraph GIT["Git desired state"]
+        direction TB
+        AUTOMATION["ImageUpdateAutomation&lt;br/&gt;updates image reference"]
+        COMMIT["Flux creates&lt;br/&gt;a Git commit"]
+        STATE["K3s repository records&lt;br/&gt;the desired image"]
+
+        AUTOMATION --&gt; COMMIT
+        COMMIT --&gt; STATE
+    end
+
+    subgraph DEPLOYMENT["Reconciliation and deployment"]
+        direction TB
+        SOURCE["Flux detects&lt;br/&gt;the Git revision"]
+        RECONCILE["Kustomization builds&lt;br/&gt;and applies resources"]
+        ROLLOUT["Kubernetes performs&lt;br/&gt;a rolling deployment"]
+        APP["Journaling application&lt;br/&gt;runs the new image"]
+
+        SOURCE --&gt; RECONCILE
+        RECONCILE --&gt; ROLLOUT
+        ROLLOUT --&gt; APP
+    end
+
+    SELECT --&gt; AUTOMATION
+    STATE --&gt; SOURCE
+
+    classDef registry fill:#402d17,stroke:#f59e0b,color:#ffffff,stroke-width:2px
+    classDef image fill:#28244d,stroke:#a78bfa,color:#ffffff,stroke-width:2px
+    classDef git fill:#242f49,stroke:#93c5fd,color:#ffffff,stroke-width:2px
+    classDef flux fill:#172f50,stroke:#60a5fa,color:#ffffff,stroke-width:2px
+    classDef workload fill:#123e42,stroke:#34d399,color:#ffffff,stroke-width:2px
+
+    class REGISTRY registry
+    class SCAN,CHECK,SELECT image
+    class AUTOMATION,COMMIT,STATE git
+    class SOURCE,RECONCILE flux
+    class ROLLOUT,APP workload
+</pre><figcaption>Flux scans the registry, records the selected image in Git, and then reconciles the journaling application from that committed desired state.</figcaption></figure><pre><code>apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: journal
+  namespace: flux-system
+spec:
+  image: git.example.internal/apps/journal
+  interval: 5m
+  secretRef:
+    name: gitea-registry-pull
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: journal
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: journal
+  filterTags:
+    pattern: '^main-(?P&lt;ts&gt;[0-9]{8}T[0-9]{6}Z)-[a-f0-9]+$'
+    extract: '$ts'
+  policy:
+    numerical:
+      order: asc</code></pre><p>A raw Git SHA is immutable but not chronological, so alphabetical sorting does not identify the newest commit. A sortable tag such as <code>main-20260814T134501Z-a1b2c3d</code> gives Flux an ordering field while retaining the commit identity.</p><pre><code>apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageUpdateAutomation
+metadata:
+  name: journal
+  namespace: flux-system
+spec:
+  interval: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        name: flux-bot
+        email: flux-bot@example.invalid
+      messageTemplate: "chore(images): update journal image"
+    push:
+      branch: main
+  update:
+    path: ./clusters/home-lab/apps/journal
+    strategy: Setters</code></pre><pre><code>image: git.example.internal/apps/journal:main-20260814T134501Z-a1b2c3d # {"$imagepolicy": "flux-system:journal"}</code></pre><p>The image controllers update Git; the normal Flux Kustomization remains responsible for deploying the result. This distinction preserves the same review, reconciliation, drift correction, and recovery model used by the rest of the cluster.</p></section>
+
+<section><h2>Verification from the Outside In</h2><p>I verified each boundary independently rather than treating a green workflow as proof of a complete deployment.</p><pre><code># Did Flux retrieve and install the OCI charts?
+flux get sources oci -A
+flux get helmreleases -A
+
+# Are the controller, listener, and ARC resources healthy?
+kubectl get pods,autoscalingrunnersets,ephemeralrunnersets,ephemeralrunners \
+  -n github-actions
+
+# What does the scale set believe its capacity is?
+kubectl describe autoscalingrunnerset journal-runner -n github-actions
+
+# Watch one job create and retire one runner pod.
+kubectl get pods -n github-actions -w
+
+# Did Flux scan, select, write, and reconcile the image?
+flux get image repository -A
+flux get image policy -A
+flux get image update -A
+flux get kustomizations -A</code></pre><p>At idle, I expect the controller and listener to remain, the current runner count to be zero, and no ephemeral runner pod to exist. During a job, pending capacity should become one running runner. Afterward, finished and deleting counters may appear briefly before the scale set returns to zero.</p><p>The final proof is the running workload's image digest, not the tag shown in Git. A successful registry push does not prove Flux selected the tag; a Flux commit does not prove reconciliation succeeded; a Deployment update does not prove the node pulled the intended image.</p></section>
+
+<section><h2>Troubleshooting by Symptom</h2><h3>403 while requesting a registration token</h3><p>Confirm the runner scope, token resource owner, selected repository, expiration, organization approval, and SSO state. For a repository-scoped fine-grained PAT, verify <strong>Administration: Read and write</strong>. Inspect the HTTP failure in controller logs before changing Kubernetes resources.</p><h3>The controller runs, but there is no listener</h3><p>Verify <code>githubConfigUrl</code>, the referenced secret name, the <code>github_token</code> key, and the secret namespace. Then inspect controller logs, HelmRelease conditions, Kubernetes API access, DNS, egress policy, and proxy behavior. A missing listener means the control plane has not reached the point where runner pods can be useful.</p><h3>The scale set exists, but jobs remain queued</h3><p>Match the workflow's <code>runs-on</code> value to <code>runnerScaleSetName</code> exactly. Check that <code>maxRunners</code> is not zero, inspect AutoscalingRunnerSet status, and read listener logs for assignment decisions. If an EphemeralRunner exists, move down the stack to scheduling events, image pulls, resource pressure, taints, volumes, and Pod Security admission.</p><h3>The runner starts, but Docker fails</h3><p>Inspect both containers. A broken DinD daemon, insufficient ephemeral storage, registry certificate error, MTU mismatch, or unreachable registry can all surface as a generic Docker client failure in the Actions step.</p><h3>An extra runner briefly appears after cancellation</h3><p>Cancellation reaches the active runner and listener on different paths. The runner can terminate before the listener observes the canceled job, causing a short-lived replacement before desired capacity settles. Persistent excess capacity is a problem; a brief correction during cancellation can be normal.</p></section>
+
+<section><h2>Security Considerations</h2><div class="article-table-wrap"><table><thead><tr><th>Risk</th><th>Control</th></tr></thead><tbody><tr><td>Privileged Docker daemon</td><td>Dedicated runner nodes or cluster, taints and tolerations, network policy, bounded egress, and evaluation of rootless BuildKit or Kubernetes mode.</td></tr><tr><td>Credential theft</td><td>Separate GitHub, push, pull, scan, and Git credentials; least privilege; encryption at rest; rotation; no plaintext in Git.</td></tr><tr><td>Untrusted workflow code</td><td>Do not run unreviewed fork pull requests on privileged self-hosted runners; use environment protection and explicit trust boundaries.</td></tr><tr><td>Supply-chain compromise</td><td>Pin actions and images, generate provenance and SBOMs, scan artifacts, sign images, and deploy immutable digests.</td></tr><tr><td>Cluster pivot</td><td>Disable service-account token automount where possible, restrict Kubernetes API access, and isolate sensitive services from runner egress.</td></tr><tr><td>Resource exhaustion</td><td>Set <code>maxRunners</code>, resource requests and limits, ephemeral-storage limits, quotas, and node reservations.</td></tr><tr><td>Lost evidence</td><td>Ship controller, listener, and ephemeral runner stdout to centralized storage with workflow and pod identifiers.</td></tr></tbody></table></div><p>Self-hosted Actions runners execute repository code on infrastructure I own. That statement, rather than the fact that the pods are temporary, defines the security model.</p></section>
+
+<section><h2>Future Improvements</h2><p>The first improvement is GitHub App authentication. GitHub recommends it for repository- and organization-scoped ARC installations. Installation tokens are short-lived and permissions are explicit, eliminating a long-lived personal token from the normal runner lifecycle.</p><p>The second is build caching. Scale-to-zero discards local Docker layers, so cold builds pay the full dependency and layer cost. A registry-backed BuildKit cache can preserve ephemerality while improving startup time. The cache needs its own retention, size, integrity, and trust policy; “make builds faster” should not quietly create an unbounded artifact store.</p><p>The third is separating trusted release work from untrusted validation. An organization-scoped runner can serve multiple repositories through runner groups, but sharing capacity also shares a trust domain. I would use different scale sets, node pools, credentials, and network policies for release builds and pull-request checks.</p><p>Finally, the delivery path should mature toward signed images, SBOM generation, vulnerability policy, digest promotion, admission verification, and metrics for job startup latency, listener availability, stuck runners, and Flux reconciliation failures.</p></section>
+
+<section><h2>Lessons Learned</h2><p>First, the API permission name matters more than intuition. Runner registration is repository administration, not merely Actions access. The 403 was accurate; I was debugging the wrong boundary.</p><p>Second, a missing listener is a high-value diagnostic signal. If the controller exists but the listener does not, authentication, configuration, or controller access failed before runner scheduling entered the picture.</p><p>Third, Kubernetes readiness counts containers, not runners. A DinD runner showing <code>2/2</code> is one pod containing the runner and Docker daemon. ARC's custom-resource status is the authoritative capacity view.</p><p>Fourth, scale-to-zero changes what healthy looks like. The absence of an idle runner pod is the desired state. The listener is durable; runners are disposable.</p><p>Finally, CI and GitOps should meet at the registry and Git. The workflow produces an immutable artifact. Flux decides which artifact the cluster should run. That boundary keeps deployment state reviewable, reversible, and recoverable without handing the build job control of production.</p></section>
+
+<section class="article-sources"><h2>Further Reading</h2><p><a href="https://docs.github.com/en/actions/concepts/runners/actions-runner-controller" rel="noopener">GitHub: Actions Runner Controller architecture</a></p><p><a href="https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets" rel="noopener">GitHub: Deploying runner scale sets</a></p><p><a href="https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/authenticate-to-the-api" rel="noopener">GitHub: Authenticating ARC to the GitHub API</a></p><p><a href="https://docs.github.com/en/actions/tutorials/use-actions-runner-controller/troubleshoot" rel="noopener">GitHub: Troubleshooting ARC</a></p><p><a href="https://fluxcd.io/flux/guides/image-update/" rel="noopener">Flux: Image update automation</a></p><p><a href="https://docs.k3s.io/installation/private-registry" rel="noopener">k3s: Private registry configuration</a></p></section>
+</article></main>
+<footer><p>&copy; 2026 Jack Smith. All rights reserved.</p><p>Connect with me via <a class="footer-link" href="mailto:contact@vulnsmith.com">email</a> or follow me on <a class="footer-link" href="https://www.linkedin.com/in/vulnsmith/">LinkedIn</a>.</p></footer>
+</body></html>
