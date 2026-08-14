@@ -1190,6 +1190,36 @@ footer {
     line-height: 1.55;
 }
 
+.article-mermaid {
+    overflow-x: auto;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: #111827;
+    box-shadow: 0 14px 34px var(--shadow-soft);
+}
+
+.article-mermaid .mermaid {
+    display: flex;
+    justify-content: center;
+    min-width: 680px;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.article-mermaid svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: none;
+}
+
+.article-mermaid figcaption {
+    padding: 0 0.25rem;
+}
+
 .article-table-wrap {
     border: 1px solid var(--border-color);
     border-radius: 8px;

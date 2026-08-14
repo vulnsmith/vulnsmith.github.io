@@ -11,6 +11,10 @@
   <script>(function(){try{var t=localStorage.getItem('vulnsmith-theme');if(!t&&matchMedia('(prefers-color-scheme: dark)').matches)t='dark';document.documentElement.dataset.theme=t||'light'}catch(e){document.documentElement.dataset.theme='light'}}());</script>
   <link href="/css/pages.css?v=20260814-1" rel="stylesheet">
   <script defer src="/js/theme-toggle.js"></script>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "dark", securityLevel: "strict" });
+  </script>
 </head>
 <body>
 <header><nav style="display:flex;align-items:center;justify-content:space-between;padding:1.5rem 2rem"><div style="font-weight:bold;font-size:1.15rem"><span>Jack Smith</span> <span class="brand-muted" style="font-weight:400">| vulnsmith</span></div><div class="nav-links"><a href="/index.html">Home</a><a href="/about.html">About</a><a href="/projects.html">Projects</a><a href="/blog.html" class="active">Blog</a><a href="/apps.html">Applications</a><a href="/tools.html">Tools</a><button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" aria-pressed="false"><span data-theme-icon>🌙</span></button></div></nav></header>
@@ -19,7 +23,65 @@
 
 <section><p>Flux had already made the cluster reproducible. The next gap was the path into it. Application manifests reconciled from Git, but container images were still built outside the platform and pushed by hand. For a small journaling application, I wanted a commit to produce an immutable image, publish it to the private Gitea registry, and let Flux promote that image without giving a CI job direct control of the cluster.</p><p>GitHub Actions Runner Controller, usually shortened to ARC, supplied the missing execution layer. ARC watches GitHub's Actions service, translates queued work into Kubernetes demand, and creates self-hosted runner pods only when jobs exist. The runner completes one job and disappears. At idle, the listener remains connected but the expensive Docker builder scales to zero.</p><p>The result is two related control loops with a deliberate boundary between them. CI builds and publishes an artifact. GitOps selects and deploys it. GitHub never receives cluster-admin credentials, and the workflow never patches the live Deployment.</p></section>
 
-<section><h2>The Architecture</h2><figure class="article-figure"><img src="/assets/images/arc-k3s-delivery-loop.svg" alt="Architecture diagram showing GitHub Actions, ARC, an ephemeral runner pod, a private Gitea registry, Flux image automation, Git, and a k3s workload"><figcaption>GitHub supplies work, ARC supplies disposable capacity, Gitea stores the image, and Flux closes the deployment loop through Git.</figcaption></figure><p>ARC itself has three visible layers. The controller is the Kubernetes operator that reconciles ARC custom resources. A listener maintains a long-poll connection to GitHub for one runner scale set. Ephemeral runner pods are the actual job capacity. Keeping those roles distinct is important during both sizing and troubleshooting.</p><div class="article-table-wrap"><table><thead><tr><th>Component</th><th>Lifetime</th><th>Responsibility</th></tr></thead><tbody><tr><td>ARC controller</td><td>Persistent</td><td>Reconciles scale sets, listeners, ephemeral runners, and runner pods.</td></tr><tr><td>Scale-set listener</td><td>Persistent</td><td>Waits for GitHub job assignments and calculates required capacity.</td></tr><tr><td>Ephemeral runner pod</td><td>One job</td><td>Checks out source, builds the image, pushes it, then terminates.</td></tr><tr><td>Docker-in-Docker sidecar</td><td>Same as runner pod</td><td>Provides the Docker daemon used by the build job.</td></tr><tr><td>Flux image controllers</td><td>Persistent</td><td>Scan Gitea, select a tag, update Git, and expose reconciliation status.</td></tr></tbody></table></div></section>
+<section><h2>From Commit to Ephemeral Runner</h2><p>The CI path begins before ARC is involved. A developer opens a feature branch, the change passes review, and merging to the default branch queues the GitHub Actions workflow. Only then does ARC translate the queued job into temporary Kubernetes capacity.</p><figure class="article-figure article-mermaid"><pre class="mermaid">
+---
+config:
+  layout: dagre
+  theme: dark
+  flowchart:
+    nodeSpacing: 45
+    rankSpacing: 65
+    curve: basis
+---
+flowchart LR
+    subgraph GITHUB["Development and GitHub"]
+        direction TB
+        DEV["Developer&lt;br/&gt;writes code"]
+        BRANCH["GitHub&lt;br/&gt;feature branch"]
+        PR["Pull request"]
+        REVIEW["Review and checks"]
+        MERGE["Merge to main"]
+        WORKFLOW["Actions workflow&lt;br/&gt;is queued"]
+
+        DEV --&gt; BRANCH
+        BRANCH --&gt; PR
+        PR --&gt; REVIEW
+        REVIEW --&gt; MERGE
+        MERGE --&gt; WORKFLOW
+    end
+
+    subgraph ARC["ARC on K3s"]
+        direction TB
+        LISTENER["Listener receives&lt;br/&gt;the job"]
+        SCALE["Scale set requests&lt;br/&gt;one runner"]
+        POD["Ephemeral runner pod&lt;br/&gt;starts"]
+        BUILD["Build and test&lt;br/&gt;the application"]
+        PUSH["Push image to&lt;br/&gt;Gitea registry"]
+        DELETE["Job completes&lt;br/&gt;and pod is deleted"]
+        ZERO["Runner capacity&lt;br/&gt;returns to zero"]
+
+        LISTENER --&gt; SCALE
+        SCALE --&gt; POD
+        POD --&gt; BUILD
+        BUILD --&gt; PUSH
+        PUSH --&gt; DELETE
+        DELETE --&gt; ZERO
+    end
+
+    WORKFLOW --&gt; LISTENER
+
+    classDef github fill:#242f49,stroke:#93c5fd,color:#ffffff,stroke-width:2px
+    classDef arc fill:#172f50,stroke:#60a5fa,color:#ffffff,stroke-width:2px
+    classDef runner fill:#123e42,stroke:#2dd4bf,color:#ffffff,stroke-width:2px
+    classDef registry fill:#402d17,stroke:#f59e0b,color:#ffffff,stroke-width:2px
+    classDef lifecycle fill:#18283d,stroke:#64748b,color:#e2e8f0,stroke-width:2px
+
+    class DEV,BRANCH,PR,REVIEW,MERGE,WORKFLOW github
+    class LISTENER,SCALE arc
+    class POD,BUILD runner
+    class PUSH registry
+    class DELETE,ZERO lifecycle
+</pre><figcaption>A reviewed merge queues work in GitHub. ARC creates one disposable runner pod, publishes the image, and returns runner capacity to zero.</figcaption></figure><p>ARC itself has three visible layers. The controller is the Kubernetes operator that reconciles ARC custom resources. A listener maintains a long-poll connection to GitHub for one runner scale set. Ephemeral runner pods are the actual job capacity. Keeping those roles distinct is important during both sizing and troubleshooting.</p><div class="article-table-wrap"><table><thead><tr><th>Component</th><th>Lifetime</th><th>Responsibility</th></tr></thead><tbody><tr><td>ARC controller</td><td>Persistent</td><td>Reconciles scale sets, listeners, ephemeral runners, and runner pods.</td></tr><tr><td>Scale-set listener</td><td>Persistent</td><td>Waits for GitHub job assignments and calculates required capacity.</td></tr><tr><td>Ephemeral runner pod</td><td>One job</td><td>Checks out source, builds the image, pushes it, then terminates.</td></tr><tr><td>Docker-in-Docker sidecar</td><td>Same as runner pod</td><td>Provides the Docker daemon used by the build job.</td></tr><tr><td>Flux image controllers</td><td>Persistent</td><td>Scan Gitea, select a tag, update Git, and expose reconciliation status.</td></tr></tbody></table></div></section>
 
 <section><h2>Prerequisites and Trust Boundaries</h2><p>The cluster already had k3s, Flux, ingress, persistent storage, and access to the private Gitea registry. ARC added several new dependencies: outbound HTTPS and DNS access to GitHub and GHCR, enough node capacity for image builds, a GitHub identity allowed to manage repository runners, and registry credentials that could push the journaling application's images.</p><p>I separated credentials by purpose. ARC's GitHub credential registers and manages runners. The workflow's Gitea credential pushes images. Cluster workloads use a different, read-only pull credential. Flux uses its own registry credential for scanning tags and a separate Git identity if image automation writes commits. Reusing one powerful secret would have been convenient, but it would also have made every component part of the same compromise path.</p><p>Docker-in-Docker was the largest security decision. It made existing Docker-based Actions straightforward, but the Docker daemon runs privileged. An ephemeral pod limits how long state survives; it does not make arbitrary workflow code harmless. Runner nodes should be treated as a build trust zone, isolated from sensitive workloads and internal services wherever the cluster topology allows it.</p></section>
 
@@ -192,7 +254,66 @@ jobs:
 
 <section><h2>Private Registry Details</h2><p>The runner needs a write-capable Gitea credential only for the login and push steps. The journaling application's namespace receives a separate image-pull secret with read-only registry access. Flux's <code>ImageRepository</code> also needs permission to enumerate tags.</p><p>If Gitea uses a private certificate authority, every K3s node that may pull the image must trust it. K3s configures containerd registry mirrors and TLS settings through <code>/etc/rancher/k3s/registries.yaml</code>. That file must be consistent across eligible nodes, and changing it requires a planned K3s restart. A publicly trusted internal certificate is simpler and safer than disabling TLS verification.</p><p>The job can successfully push an image while Kubernetes still fails to pull it. Registry publication, Flux scanning, and node image pulls are three separate authentication and trust paths; each needs independent verification.</p></section>
 
-<section><h2>Flux Image Automation</h2><p>Flux image automation closes the loop without giving the GitHub workflow Kubernetes credentials. An <code>ImageRepository</code> scans Gitea, an <code>ImagePolicy</code> selects an allowed tag, and an <code>ImageUpdateAutomation</code> writes that selection back to the cluster repository.</p><pre><code>apiVersion: image.toolkit.fluxcd.io/v1beta2
+<section><h2>Flux Image Automation</h2><p>Flux image automation closes the loop without giving the GitHub workflow Kubernetes credentials. The delivery path has three ownership boundaries: registry discovery and policy, Git desired state, and cluster reconciliation. An <code>ImageRepository</code> scans Gitea, an <code>ImagePolicy</code> selects an allowed tag, and an <code>ImageUpdateAutomation</code> writes that selection back to the cluster repository before the normal Flux reconciliation deploys it.</p><figure class="article-figure article-mermaid"><pre class="mermaid">
+---
+config:
+  layout: dagre
+  theme: dark
+  flowchart:
+    nodeSpacing: 45
+    rankSpacing: 65
+    curve: basis
+---
+flowchart LR
+    subgraph DISCOVERY["Registry and image selection"]
+        direction TB
+        REGISTRY["Gitea registry&lt;br/&gt;contains new image"]
+        SCAN["ImageRepository&lt;br/&gt;scans tags"]
+        CHECK["ImagePolicy&lt;br/&gt;checks versions"]
+        SELECT["Newest eligible&lt;br/&gt;image selected"]
+
+        REGISTRY --&gt; SCAN
+        SCAN --&gt; CHECK
+        CHECK --&gt; SELECT
+    end
+
+    subgraph GIT["Git desired state"]
+        direction TB
+        AUTOMATION["ImageUpdateAutomation&lt;br/&gt;updates image reference"]
+        COMMIT["Flux creates&lt;br/&gt;a Git commit"]
+        STATE["K3s repository records&lt;br/&gt;the desired image"]
+
+        AUTOMATION --&gt; COMMIT
+        COMMIT --&gt; STATE
+    end
+
+    subgraph DEPLOYMENT["Reconciliation and deployment"]
+        direction TB
+        SOURCE["Flux detects&lt;br/&gt;the Git revision"]
+        RECONCILE["Kustomization builds&lt;br/&gt;and applies resources"]
+        ROLLOUT["Kubernetes performs&lt;br/&gt;a rolling deployment"]
+        APP["Journaling application&lt;br/&gt;runs the new image"]
+
+        SOURCE --&gt; RECONCILE
+        RECONCILE --&gt; ROLLOUT
+        ROLLOUT --&gt; APP
+    end
+
+    SELECT --&gt; AUTOMATION
+    STATE --&gt; SOURCE
+
+    classDef registry fill:#402d17,stroke:#f59e0b,color:#ffffff,stroke-width:2px
+    classDef image fill:#28244d,stroke:#a78bfa,color:#ffffff,stroke-width:2px
+    classDef git fill:#242f49,stroke:#93c5fd,color:#ffffff,stroke-width:2px
+    classDef flux fill:#172f50,stroke:#60a5fa,color:#ffffff,stroke-width:2px
+    classDef workload fill:#123e42,stroke:#34d399,color:#ffffff,stroke-width:2px
+
+    class REGISTRY registry
+    class SCAN,CHECK,SELECT image
+    class AUTOMATION,COMMIT,STATE git
+    class SOURCE,RECONCILE flux
+    class ROLLOUT,APP workload
+</pre><figcaption>Flux scans the registry, records the selected image in Git, and then reconciles the journaling application from that committed desired state.</figcaption></figure><pre><code>apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImageRepository
 metadata:
   name: journal
