@@ -1107,6 +1107,25 @@ footer {
     margin-bottom: 1.1rem;
 }
 
+.article ol,
+.article ul {
+    margin: 1.25rem 0 1.5rem;
+    padding-left: 1.65rem;
+}
+
+.article li {
+    color: var(--lede-color);
+    font-size: 1.04rem;
+    line-height: 1.65;
+    margin: 0.55rem 0;
+    padding-left: 0.3rem;
+}
+
+.article ol + p,
+.article ul + p {
+    margin-top: 1.35rem;
+}
+
 .article-callout {
     border-left: 4px solid var(--accent-color);
     border-radius: 8px;
